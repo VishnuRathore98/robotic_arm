@@ -51,6 +51,7 @@ void loop(){
 
     if(error){
       Serial.println("Json deserialization error");
+      Serial.println(error.f_str());
       return;
     }
 
