@@ -1,31 +1,87 @@
+import time
 import gradio as gr
 import serial as sr
+import json
 
 arduino = sr.Serial(port='/dev/ttyACM0', baudrate=9600, timeout=.1)
 
 def set_base_angle(angle):
-    print("base angle: ", bytes(angle,'utf-8'))
-    arduino.write(bytes(angle,'utf-8')) 
+    data = {
+        "motor":"base",
+        "angle":angle
+    }
+    json_str = json.dumps(data)+'\n'
+    arduino.write(json_str.encode()) 
+    time.sleep(0.2)
+    response = arduino.readline().decode().strip()
+    print("data sent: ", json_str)
+    print("data received: ", response)
+    # return response
 
 def set_arm1_angle(angle):
-    print("arm1 angle: ", angle)
-    arduino.write(bytes(angle, 'utf-8'))
+    data = {
+        "motor":"arm1",
+        "angle":angle
+    }
+    json_str = json.dumps(data)+'\n'
+    arduino.write(json_str.encode()) 
+    time.sleep(0.2)
+    response = arduino.readline().decode().strip()
+    print("data sent: ", json_str)
+    print("data received: ", response)
+    # return response
 
 def set_arm2_angle(angle):
-    print("arm2 angle: ", angle)
-    arduino.write(bytes(angle, 'utf-8'))
+    data = {
+        "motor":"arm2",
+        "angle":angle
+    }
+    json_str = json.dumps(data)+'\n'
+    arduino.write(json_str.encode()) 
+    time.sleep(0.2)
+    response = arduino.readline().decode().strip()
+    print("data sent: ", json_str)
+    print("data received: ", response)
+    # return response
 
 def set_wrist_angle(angle):
-    print("wrist angle: ", angle)
-    arduino.write(bytes(angle, 'utf-8'))
+    data = {
+        "motor":"wrist",
+        "angle":angle
+    }
+    json_str = json.dumps(data)+'\n'
+    arduino.write(json_str.encode()) 
+    time.sleep(0.2)
+    response = arduino.readline().decode().strip()
+    print("data sent: ", json_str)
+    print("data received: ", response)
+    # return response
 
 def set_left_claw_angle(angle):
-    print("left claw angle: ", angle)
-    arduino.write(bytes(angle, 'utf-8'))
+    data = {
+        "motor":"left_claw",
+        "angle":angle
+    }
+    json_str = json.dumps(data)+'\n'
+    arduino.write(json_str.encode()) 
+    time.sleep(0.2)
+    response = arduino.readline().decode().strip()
+    print("data sent: ", json_str)
+    print("data received: ", response)
+    # return response
 
 def set_right_claw_angle(angle):
-    print("right claw angle: ", angle)
-    arduino.write(bytes(angle, 'utf-8'))
+    data = {
+        "motor":"right_claw",
+        "angle":angle
+    }
+    json_str = json.dumps(data)+'\n'
+    arduino.write(json_str.encode()) 
+    time.sleep(0.2)
+    response = arduino.readline().decode().strip()
+    print("data sent: ", json_str)
+    print("data received: ", response)
+    # return response
 
 with gr.Blocks() as app:
     with gr.Row():
