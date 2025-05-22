@@ -237,13 +237,13 @@ void left_arm_set_default_position(){
   Serial.println(left_arm_right_claw_angle);
 
   // move claw left to 90
-      if(left_arm_left_claw_angle!=90)
-       L_SERVO_MOTOR_LEFT_CLAW_4.write(90);
+      if(left_arm_left_claw_angle!=45)
+       L_SERVO_MOTOR_LEFT_CLAW_4.write(45);
       delay(200);
 
   // move claw right to 90
-    if(left_arm_right_claw_angle!=90)
-      L_SERVO_MOTOR_RIGHT_CLAW_5.write(90);
+    if(left_arm_right_claw_angle!=100)
+      L_SERVO_MOTOR_RIGHT_CLAW_5.write(100);
  delay(200);
 
   // move arm1 to 90
@@ -262,8 +262,8 @@ void left_arm_set_default_position(){
     delay(200);
  
   // move wrist to 180
-      if(left_arm_wrist_angle!=180)
-       L_SERVO_MOTOR_WRIST_3.write(180);
+      if(left_arm_wrist_angle!=0)
+       L_SERVO_MOTOR_WRIST_3.write(0);
      delay(200);
 
 }
@@ -273,14 +273,17 @@ void left_arm_hold_object(){
   L_SERVO_MOTOR_BASE_0.write(0); // Base
   delay(200);
   L_SERVO_MOTOR_ARM1_1.write(20); // Arm 1
-  delay(200);
+  delay(500);
+ 
+  L_SERVO_MOTOR_ARM2_2.write(100); // Arm 2
+ delay(500);
   L_SERVO_MOTOR_ARM2_2.write(135); // Arm 2
   delay(200);
   L_SERVO_MOTOR_WRIST_3.write(0); // Wrist
   delay(200);
-  L_SERVO_MOTOR_LEFT_CLAW_4.write(115); // Left claw
-  delay(200);
-  L_SERVO_MOTOR_RIGHT_CLAW_5.write(80); // Right claw
+  L_SERVO_MOTOR_LEFT_CLAW_4.write(90); // Left claw
+  delay(1000);
+  L_SERVO_MOTOR_RIGHT_CLAW_5.write(90); // Right claw
   delay(200);
 
   Serial.println("hold_object called");
@@ -296,9 +299,9 @@ void left_arm_fold_object(){
   delay(200);
   L_SERVO_MOTOR_WRIST_3.write(180); // Wrist
   delay(200);
-  L_SERVO_MOTOR_LEFT_CLAW_4.write(115); // Left claw
+  L_SERVO_MOTOR_LEFT_CLAW_4.write(90); // Left claw
   delay(200);
-  L_SERVO_MOTOR_RIGHT_CLAW_5.write(80); // Right claw
+  L_SERVO_MOTOR_RIGHT_CLAW_5.write(90); // Right claw
   delay(200);
 
   Serial.println("fold_object called");
@@ -427,9 +430,9 @@ void right_arm_hold_object(){
   delay(200);
   R_SERVO_MOTOR_WRIST_3.write(180); // Wrist
   delay(200);
-  R_SERVO_MOTOR_LEFT_CLAW_4.write(110); // Left claw
+  R_SERVO_MOTOR_LEFT_CLAW_4.write(105); // Left claw
   delay(200);
-  R_SERVO_MOTOR_RIGHT_CLAW_5.write(70); // Right claw
+  R_SERVO_MOTOR_RIGHT_CLAW_5.write(80); // Right claw
   delay(200);
 
   Serial.println("hold_object called");
