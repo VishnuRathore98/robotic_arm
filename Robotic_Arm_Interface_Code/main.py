@@ -101,29 +101,24 @@ def set_left_arm_default_position():
     arduino.write(json_str.encode())
     print("Set default position")
 
-def left_arm_pick_object():
+def left_arm_hold_object():
     data = {
-        "motor":"l_pick_object",
+        "motor":"l_hold_object",
         "angle":"0"
     }
     json_str = json.dumps(data)+'\n'
     arduino.write(json_str.encode())   
-    print("Pick Object")
+    print("Hold Object")
 
-def left_arm_drop_object():
+def left_arm_fold_object():
     data = {
-        "motor":"l_drop_object",
+        "motor":"l_fold_object",
         "angle":"0"
     }
     json_str = json.dumps(data)+'\n'
     arduino.write(json_str.encode())
-    print("Drop Object")
+    print("Fold Object")
     
-def left_arm_hold_leaf():
-    ...
-
-def left_arm_fold_leaf():
-    ...
 
 def left_arm_leave_leaf():
     ...
@@ -217,29 +212,24 @@ def set_right_arm_default_position():
     arduino.write(json_str.encode())
     print("Set default position")
 
-def right_arm_pick_object():
+def right_arm_hold_object():
     data = {
-        "motor":"r_pick_object",
+        "motor":"r_hold_object",
         "angle":"0"
     }
     json_str = json.dumps(data)+'\n'
     arduino.write(json_str.encode())   
-    print("Pick Object")
+    print("Hold Object")
 
-def right_arm_drop_object():
+def right_arm_fold_object():
     data = {
-        "motor":"r_drop_object",
+        "motor":"r_fold_object",
         "angle":"0"
     }
     json_str = json.dumps(data)+'\n'
     arduino.write(json_str.encode())
-    print("Drop Object")
+    print("Fold Object")
 
-def right_arm_hold_leaf():
-    ...
-
-def right_arm_fold_leaf():
-    ...
 
 def right_arm_leave_leaf():
     ...
@@ -269,8 +259,8 @@ with gr.Blocks() as app:
             left_arm_button_claw_right = gr.Button("Set Right Claw")
         
             left_arm_button_set_default_position = gr.Button("Set Default Position")
-            left_arm_button_pick_object = gr.Button("Pick Object")
-            left_arm_button_drop_object = gr.Button("Drop Object")
+            left_arm_button_hold_object = gr.Button("Hold Object")
+            left_arm_button_fold_object = gr.Button("Fold Object")
 
             left_arm_button_base.click(fn=set_left_arm_base_angle, inputs=left_arm_input_base)
             left_arm_button_arm1.click(fn=set_left_arm_arm1_angle, inputs=left_arm_input_arm1)
@@ -279,8 +269,8 @@ with gr.Blocks() as app:
             left_arm_button_claw_left.click(fn=set_left_arm_left_claw_angle, inputs=left_arm_input_claw_left)
             left_arm_button_claw_right.click(fn=set_left_arm_right_claw_angle, inputs=left_arm_input_claw_right)
             left_arm_button_set_default_position.click(fn=set_left_arm_default_position)
-            left_arm_button_pick_object.click(fn=left_arm_pick_object)
-            left_arm_button_drop_object.click(fn=left_arm_drop_object)
+            left_arm_button_hold_object.click(fn=left_arm_hold_object)
+            left_arm_button_fold_object.click(fn=left_arm_fold_object)
             
         with gr.Column():
             gr.Markdown("# **Right Arm**")
@@ -304,8 +294,8 @@ with gr.Blocks() as app:
             right_arm_button_claw_right = gr.Button("Set Right Claw")
         
             right_arm_button_set_default_position = gr.Button("Set Default Position")
-            right_arm_button_pick_object = gr.Button("Pick Object")
-            right_arm_button_drop_object = gr.Button("Drop Object")
+            right_arm_button_hold_object = gr.Button("Hold Object")
+            right_arm_button_fold_object = gr.Button("Fold Object")
 
             right_arm_button_base.click(fn=set_right_arm_base_angle, inputs=right_arm_input_base)
             right_arm_button_arm1.click(fn=set_right_arm_arm1_angle, inputs=right_arm_input_arm1)
@@ -314,6 +304,6 @@ with gr.Blocks() as app:
             right_arm_button_claw_left.click(fn=set_right_arm_left_claw_angle, inputs=right_arm_input_claw_left)
             right_arm_button_claw_right.click(fn=set_right_arm_right_claw_angle, inputs=right_arm_input_claw_right)
             right_arm_button_set_default_position.click(fn=set_right_arm_default_position)
-            right_arm_button_pick_object.click(fn=right_arm_pick_object)
-            right_arm_button_drop_object.click(fn=right_arm_drop_object)
+            right_arm_button_hold_object.click(fn=right_arm_hold_object)
+            right_arm_button_fold_object.click(fn=right_arm_fold_object)
 app.launch()
