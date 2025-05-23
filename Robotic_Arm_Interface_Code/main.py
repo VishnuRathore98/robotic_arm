@@ -13,7 +13,17 @@ except Exception as e:
         time.sleep(2)
     except:
         print("port ttyACM0 not available")
-
+        try:
+            arduino = sr.Serial(port='/dev/ttyACM1', baudrate=9600, timeout=.1)
+            time.sleep(2)
+        except:
+            print("port ttyACM1 not available")
+            try:
+                arduino = sr.Serial(port='/dev/ttyACM2', baudrate=9600, timeout=.1)
+                time.sleep(2)
+            except:
+                print("port ttyACM2 not available")
+                
 def set_left_arm_base_angle(angle):
     data = {
         "motor":"l_base",
@@ -66,9 +76,9 @@ def set_left_arm_wrist_angle(angle):
     print("data received: ", response)
     # return response
 
-def set_left_arm_left_claw_angle(angle):
+def set_left_arm_claw_angle(angle):
     data = {
-        "motor":"l_left_claw",
+        "motor":"l_claw",
         "angle":angle
     }
     json_str = json.dumps(data)+'\n'
@@ -79,18 +89,6 @@ def set_left_arm_left_claw_angle(angle):
     print("data received: ", response)
     # return response
 
-def set_left_arm_right_claw_angle(angle):
-    data = {
-        "motor":"l_right_claw",
-        "angle":angle
-    }
-    json_str = json.dumps(data)+'\n'
-    arduino.write(json_str.encode()) 
-    time.sleep(0.2)
-    response = arduino.readline().decode().strip()
-    print("data sent: ", json_str)
-    print("data received: ", response)
-    # return response
 
 def set_left_arm_default_position():
     data = {
@@ -177,9 +175,9 @@ def set_right_arm_wrist_angle(angle):
     print("data received: ", response)
     # return response
 
-def set_right_arm_left_claw_angle(angle):
+def set_right_arm_claw_angle(angle):
     data = {
-        "motor":"r_left_claw",
+        "motor":"r_claw",
         "angle":angle
     }
     json_str = json.dumps(data)+'\n'
@@ -190,18 +188,6 @@ def set_right_arm_left_claw_angle(angle):
     print("data received: ", response)
     # return response
 
-def set_right_arm_right_claw_angle(angle):
-    data = {
-        "motor":"r_right_claw",
-        "angle":angle
-    }
-    json_str = json.dumps(data)+'\n'
-    arduino.write(json_str.encode()) 
-    time.sleep(0.2)
-    response = arduino.readline().decode().strip()
-    print("data sent: ", json_str)
-    print("data received: ", response)
-    # return response
 
 def set_right_arm_default_position():
     data = {
@@ -239,24 +225,21 @@ with gr.Blocks() as app:
     with gr.Row():
         with gr.Column():
             gr.Markdown("# **Left Arm**")
-        
-            left_arm_input_base = gr.Text(label="Base")
-            left_arm_button_base = gr.Button("Set Base")
-        
-            left_arm_input_arm1 = gr.Text(label="Arm1")
-            left_arm_button_arm1 = gr.Button("Set Arm1")
-        
-            left_arm_input_arm2 = gr.Text(label="Arm2")
-            left_arm_button_arm2 = gr.Button("Set Arm2")
-        
-            left_arm_input_wrist = gr.Text(label="Wrist")
-            left_arm_button_wrist = gr.Button("Set Wrist")
-        
-            left_arm_input_claw_left = gr.Text(label="Left Claw")
-            left_arm_button_claw_left = gr.Button("Set Left Claw")
-        
-            left_arm_input_claw_right = gr.Text(label="Right Claw")
-            left_arm_button_claw_right = gr.Button("Set Right Claw")
+            with gr.Group():
+                left_arm_input_base = gr.Text(label="Base")
+                left_arm_button_base = gr.Button("Set Base")
+            
+                left_arm_input_arm1 = gr.Text(label="Arm1")
+                left_arm_button_arm1 = gr.Button("Set Arm1")
+            
+                left_arm_input_arm2 = gr.Text(label="Arm2")
+                left_arm_button_arm2 = gr.Button("Set Arm2")
+            
+                left_arm_input_wrist = gr.Text(label="Wrist")
+                left_arm_button_wrist = gr.Button("Set Wrist")
+            
+                left_arm_input_claw = gr.Text(label="Claw")
+                left_arm_button_claw = gr.Button("Set Claw")
         
             left_arm_button_set_default_position = gr.Button("Set Default Position")
             left_arm_button_hold_object = gr.Button("Hold Object")
@@ -266,32 +249,28 @@ with gr.Blocks() as app:
             left_arm_button_arm1.click(fn=set_left_arm_arm1_angle, inputs=left_arm_input_arm1)
             left_arm_button_arm2.click(fn=set_left_arm_arm2_angle, inputs=left_arm_input_arm2)
             left_arm_button_wrist.click(fn=set_left_arm_wrist_angle, inputs=left_arm_input_wrist)
-            left_arm_button_claw_left.click(fn=set_left_arm_left_claw_angle, inputs=left_arm_input_claw_left)
-            left_arm_button_claw_right.click(fn=set_left_arm_right_claw_angle, inputs=left_arm_input_claw_right)
+            left_arm_button_claw.click(fn=set_left_arm_claw_angle, inputs=left_arm_input_claw)
             left_arm_button_set_default_position.click(fn=set_left_arm_default_position)
             left_arm_button_hold_object.click(fn=left_arm_hold_object)
             left_arm_button_fold_object.click(fn=left_arm_fold_object)
             
         with gr.Column():
             gr.Markdown("# **Right Arm**")
-        
-            right_arm_input_base = gr.Text(label="Base")
-            right_arm_button_base = gr.Button("Set Base")
-        
-            right_arm_input_arm1 = gr.Text(label="Arm1")
-            right_arm_button_arm1 = gr.Button("Set Arm1")
-        
-            right_arm_input_arm2 = gr.Text(label="Arm2")
-            right_arm_button_arm2 = gr.Button("Set Arm2")
-        
-            right_arm_input_wrist = gr.Text(label="Wrist")
-            right_arm_button_wrist = gr.Button("Set Wrist")
-        
-            right_arm_input_claw_left = gr.Text(label="Left Claw")
-            right_arm_button_claw_left = gr.Button("Set Left Claw")
-        
-            right_arm_input_claw_right = gr.Text(label="Right Claw")
-            right_arm_button_claw_right = gr.Button("Set Right Claw")
+            with gr.Group():
+                right_arm_input_base = gr.Text(label="Base")
+                right_arm_button_base = gr.Button("Set Base")
+            
+                right_arm_input_arm1 = gr.Text(label="Arm1")
+                right_arm_button_arm1 = gr.Button("Set Arm1")
+            
+                right_arm_input_arm2 = gr.Text(label="Arm2")
+                right_arm_button_arm2 = gr.Button("Set Arm2")
+            
+                right_arm_input_wrist = gr.Text(label="Wrist")
+                right_arm_button_wrist = gr.Button("Set Wrist")
+            
+                right_arm_input_claw = gr.Text(label="Claw")
+                right_arm_button_claw = gr.Button("Set Claw")
         
             right_arm_button_set_default_position = gr.Button("Set Default Position")
             right_arm_button_hold_object = gr.Button("Hold Object")
@@ -301,8 +280,7 @@ with gr.Blocks() as app:
             right_arm_button_arm1.click(fn=set_right_arm_arm1_angle, inputs=right_arm_input_arm1)
             right_arm_button_arm2.click(fn=set_right_arm_arm2_angle, inputs=right_arm_input_arm2)
             right_arm_button_wrist.click(fn=set_right_arm_wrist_angle, inputs=right_arm_input_wrist)
-            right_arm_button_claw_left.click(fn=set_right_arm_left_claw_angle, inputs=right_arm_input_claw_left)
-            right_arm_button_claw_right.click(fn=set_right_arm_right_claw_angle, inputs=right_arm_input_claw_right)
+            right_arm_button_claw.click(fn=set_right_arm_claw_angle, inputs=right_arm_input_claw)
             right_arm_button_set_default_position.click(fn=set_right_arm_default_position)
             right_arm_button_hold_object.click(fn=right_arm_hold_object)
             right_arm_button_fold_object.click(fn=right_arm_fold_object)

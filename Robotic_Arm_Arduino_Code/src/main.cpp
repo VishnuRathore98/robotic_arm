@@ -2,43 +2,38 @@
 #include <Servo.h>
 #include <ArduinoJson.h>
 
-// Right Arm
-#define L_SERVO_PIN_BASE_0 2  // Base 0-180 is possible 
-#define L_SERVO_PIN_ARM1_1 3  // Base 0-180 is possible 
+// Left Arm
+#define L_SERVO_PIN_BASE_0 2  
+#define L_SERVO_PIN_ARM1_1 3  
 #define L_SERVO_PIN_ARM2_2 4
-#define L_SERVO_PIN_WRIST_3 5   // Wrist 0-180
-#define L_SERVO_PIN_LEFT_CLAW_4 6 // Left Claw 0-180
-#define L_SERVO_PIN_RIGHT_CLAW_5 7  // Right Claw 0-180
+#define L_SERVO_PIN_WRIST_3 5   
+#define L_SERVO_PIN_CLAW_4 6
 
 Servo L_SERVO_MOTOR_BASE_0;
 Servo L_SERVO_MOTOR_ARM1_1;
 Servo L_SERVO_MOTOR_ARM2_2;
 Servo L_SERVO_MOTOR_WRIST_3;
-Servo L_SERVO_MOTOR_LEFT_CLAW_4;
-Servo L_SERVO_MOTOR_RIGHT_CLAW_5;
+Servo L_SERVO_MOTOR_CLAW_4;
 
-// Left Arm
-#define R_SERVO_PIN_BASE_0 8  // Base 0-180 is possible 
-#define R_SERVO_PIN_ARM1_1 9  // Base 0-180 is possible 
+// Right Arm
+#define R_SERVO_PIN_BASE_0 8  
+#define R_SERVO_PIN_ARM1_1 9  
 #define R_SERVO_PIN_ARM2_2 10
-#define R_SERVO_PIN_WRIST_3 11   // Wrist 0-180
-#define R_SERVO_PIN_LEFT_CLAW_4 12 // Left Claw 0-180
-#define R_SERVO_PIN_RIGHT_CLAW_5 13  // Right Claw 0-180
+#define R_SERVO_PIN_WRIST_3 11  
+#define R_SERVO_PIN_CLAW_4 12
 
 Servo R_SERVO_MOTOR_BASE_0;
 Servo R_SERVO_MOTOR_ARM1_1;
 Servo R_SERVO_MOTOR_ARM2_2;
 Servo R_SERVO_MOTOR_WRIST_3;
-Servo R_SERVO_MOTOR_LEFT_CLAW_4;
-Servo R_SERVO_MOTOR_RIGHT_CLAW_5;
+Servo R_SERVO_MOTOR_CLAW_4;
 
 
 void left_arm_base(int angle);
 void left_arm_arm1(int angle);
 void left_arm_arm2(int angle);
 void left_arm_wrist(int angle);
-void left_arm_left_claw(int angle);
-void left_arm_right_claw(int angle);
+void left_arm_claw(int angle);
 
 void left_arm_set_default_position();
 void left_arm_hold_object();
@@ -50,8 +45,7 @@ void right_arm_base(int angle);
 void right_arm_arm1(int angle);
 void right_arm_arm2(int angle);
 void right_arm_wrist(int angle);
-void right_arm_left_claw(int angle);
-void right_arm_right_claw(int angle);
+void right_arm_claw(int angle);
 
 void right_arm_set_default_position();
 void right_arm_hold_object();
@@ -65,15 +59,14 @@ void setup(){
   L_SERVO_MOTOR_ARM1_1.attach(L_SERVO_PIN_ARM1_1); // Arm 1
   L_SERVO_MOTOR_ARM2_2.attach(L_SERVO_PIN_ARM2_2); // Arm 2
   L_SERVO_MOTOR_WRIST_3.attach(L_SERVO_PIN_WRIST_3); // Wrist
-  L_SERVO_MOTOR_LEFT_CLAW_4.attach(L_SERVO_PIN_LEFT_CLAW_4); // Left
-  L_SERVO_MOTOR_RIGHT_CLAW_5.attach(L_SERVO_PIN_RIGHT_CLAW_5); // Right
+  L_SERVO_MOTOR_CLAW_4.attach(L_SERVO_PIN_CLAW_4); // Left
 
   R_SERVO_MOTOR_BASE_0.attach(R_SERVO_PIN_BASE_0); // Base
   R_SERVO_MOTOR_ARM1_1.attach(R_SERVO_PIN_ARM1_1); // Arm 1
   R_SERVO_MOTOR_ARM2_2.attach(R_SERVO_PIN_ARM2_2); // Arm 2
   R_SERVO_MOTOR_WRIST_3.attach(R_SERVO_PIN_WRIST_3); // Wrist
-  R_SERVO_MOTOR_LEFT_CLAW_4.attach(R_SERVO_PIN_LEFT_CLAW_4); // Left
-  R_SERVO_MOTOR_RIGHT_CLAW_5.attach(R_SERVO_PIN_RIGHT_CLAW_5); // Right
+  R_SERVO_MOTOR_CLAW_4.attach(R_SERVO_PIN_CLAW_4); // Left
+  
 }
 
 void loop(){
@@ -107,11 +100,8 @@ void loop(){
     else if (motor == "l_wrist")
       left_arm_wrist(angle.toInt());
     
-    else if (motor == "l_left_claw")
-      left_arm_left_claw(angle.toInt());
-    
-    else if (motor == "l_right_claw")
-      left_arm_right_claw(angle.toInt());
+    else if (motor == "l_claw")
+      left_arm_claw(angle.toInt());
     
     else if (motor == "l_set_default_position")
       left_arm_set_default_position();
@@ -136,11 +126,8 @@ void loop(){
     else if (motor == "r_wrist")
       right_arm_wrist(angle.toInt());
     
-    else if (motor == "r_left_claw")
-      right_arm_left_claw(angle.toInt());
-    
-    else if (motor == "r_right_claw")
-      right_arm_right_claw(angle.toInt());
+    else if (motor == "r_claw")
+      right_arm_claw(angle.toInt());
     
     else if (motor == "r_set_default_position")
       right_arm_set_default_position();
@@ -184,17 +171,12 @@ void left_arm_wrist(int angle){
   Serial.println(angle);
 }
 
-void left_arm_left_claw(int angle){
-  L_SERVO_MOTOR_LEFT_CLAW_4.write(angle);
+void left_arm_claw(int angle){
+  L_SERVO_MOTOR_CLAW_4.write(angle);
   Serial.print("Left Claw at: ");
   Serial.println(angle);
 }
 
-void left_arm_right_claw(int angle){
-  L_SERVO_MOTOR_RIGHT_CLAW_5.write(angle);
-  Serial.print("Right Claw at: ");
-  Serial.println(angle);
-}
 
 void left_arm_set_default_position(){
   // servo.read() -> returns the last position value written to the servo
@@ -212,10 +194,8 @@ void left_arm_set_default_position(){
   int left_arm_wrist_angle = L_SERVO_MOTOR_WRIST_3.read();
 
   // get claw left current position
-  int left_arm_left_claw_angle = L_SERVO_MOTOR_LEFT_CLAW_4.read();
+  int left_arm_claw_angle = L_SERVO_MOTOR_CLAW_4.read();
 
-  // get claw right current position
-  int left_arm_right_claw_angle = L_SERVO_MOTOR_RIGHT_CLAW_5.read();
   
   // print current arm positions
   Serial.print("Currnt Base angle: ");
@@ -231,20 +211,14 @@ void left_arm_set_default_position(){
   Serial.println(left_arm_wrist_angle); 
   
   Serial.print("Currnt left angle: ");
-  Serial.println(left_arm_left_claw_angle); 
+  Serial.println(left_arm_claw_angle); 
   
-  Serial.print("Currnt right angle: ");
-  Serial.println(left_arm_right_claw_angle);
 
   // move claw left to 90
-      if(left_arm_left_claw_angle!=45)
-       L_SERVO_MOTOR_LEFT_CLAW_4.write(45);
+      if(left_arm_claw_angle!=110)
+       L_SERVO_MOTOR_CLAW_4.write(110);
       delay(200);
 
-  // move claw right to 90
-    if(left_arm_right_claw_angle!=100)
-      L_SERVO_MOTOR_RIGHT_CLAW_5.write(100);
- delay(200);
 
   // move arm1 to 90
     if(left_arm_arm1_angle!=90)
@@ -281,10 +255,8 @@ void left_arm_hold_object(){
   delay(200);
   L_SERVO_MOTOR_WRIST_3.write(0); // Wrist
   delay(200);
-  L_SERVO_MOTOR_LEFT_CLAW_4.write(90); // Left claw
+  L_SERVO_MOTOR_CLAW_4.write(90); // Left claw
   delay(1000);
-  L_SERVO_MOTOR_RIGHT_CLAW_5.write(90); // Right claw
-  delay(200);
 
   Serial.println("hold_object called");
 }
@@ -299,9 +271,7 @@ void left_arm_fold_object(){
   delay(200);
   L_SERVO_MOTOR_WRIST_3.write(180); // Wrist
   delay(200);
-  L_SERVO_MOTOR_LEFT_CLAW_4.write(90); // Left claw
-  delay(200);
-  L_SERVO_MOTOR_RIGHT_CLAW_5.write(90); // Right claw
+  L_SERVO_MOTOR_CLAW_4.write(90); // Left claw
   delay(200);
 
   Serial.println("fold_object called");
@@ -336,17 +306,12 @@ void right_arm_wrist(int angle){
   Serial.println(angle);
 }
 
-void right_arm_left_claw(int angle){
-  R_SERVO_MOTOR_LEFT_CLAW_4.write(angle);
+void right_arm_claw(int angle){
+  R_SERVO_MOTOR_CLAW_4.write(angle);
   Serial.print("Left Claw at: ");
   Serial.println(angle);
 }
 
-void right_arm_right_claw(int angle){
-  R_SERVO_MOTOR_RIGHT_CLAW_5.write(angle);
-  Serial.print("Right Claw at: ");
-  Serial.println(angle);
-}
 
 void right_arm_set_default_position(){
   // servo.read() -> returns the last position value written to the servo
@@ -364,10 +329,8 @@ void right_arm_set_default_position(){
   int right_arm_wrist_angle = R_SERVO_MOTOR_WRIST_3.read();
 
   // get claw left current position
-  int right_arm_left_claw_angle = R_SERVO_MOTOR_LEFT_CLAW_4.read();
+  int right_arm_claw_angle = R_SERVO_MOTOR_CLAW_4.read();
 
-  // get claw right current position
-  int right_arm_right_claw_angle = R_SERVO_MOTOR_RIGHT_CLAW_5.read();
   
   // print current arm positions
   Serial.print("Currnt Base angle: ");
@@ -383,20 +346,13 @@ void right_arm_set_default_position(){
   Serial.println(right_arm_wrist_angle); 
   
   Serial.print("Currnt left angle: ");
-  Serial.println(right_arm_left_claw_angle); 
+  Serial.println(right_arm_claw_angle); 
   
-  Serial.print("Currnt right angle: ");
-  Serial.println(right_arm_right_claw_angle);
 
   // move claw left to 90
-      if(right_arm_left_claw_angle!=90)
-       R_SERVO_MOTOR_LEFT_CLAW_4.write(90);
+      if(right_arm_claw_angle!=60)
+       R_SERVO_MOTOR_CLAW_4.write(60);
       delay(200);
-
-  // move claw right to 90
-    if(right_arm_right_claw_angle!=90)
-      R_SERVO_MOTOR_RIGHT_CLAW_5.write(90);
- delay(200);
 
   // move arm1 to 90
     if(right_arm_arm1_angle!=90)
@@ -430,9 +386,7 @@ void right_arm_hold_object(){
   delay(200);
   R_SERVO_MOTOR_WRIST_3.write(180); // Wrist
   delay(200);
-  R_SERVO_MOTOR_LEFT_CLAW_4.write(105); // Left claw
-  delay(200);
-  R_SERVO_MOTOR_RIGHT_CLAW_5.write(80); // Right claw
+  R_SERVO_MOTOR_CLAW_4.write(105); // Left claw
   delay(200);
 
   Serial.println("hold_object called");
@@ -448,9 +402,7 @@ void right_arm_fold_object(){
   delay(200);
   R_SERVO_MOTOR_WRIST_3.write(0); // Wrist
   delay(200);
-  R_SERVO_MOTOR_LEFT_CLAW_4.write(110); // Left claw
-  delay(200);
-  R_SERVO_MOTOR_RIGHT_CLAW_5.write(70); // Right claw
+  R_SERVO_MOTOR_CLAW_4.write(110); // Left claw
   delay(200);
 
   Serial.println("fold_object called");
