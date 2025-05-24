@@ -66,7 +66,10 @@ void setup(){
   R_SERVO_MOTOR_ARM2_2.attach(R_SERVO_PIN_ARM2_2); // Arm 2
   R_SERVO_MOTOR_WRIST_3.attach(R_SERVO_PIN_WRIST_3); // Wrist
   R_SERVO_MOTOR_CLAW_4.attach(R_SERVO_PIN_CLAW_4); // Left
-  
+
+  right_arm_set_default_position();
+  left_arm_set_default_position();
+
 }
 
 void loop(){
@@ -250,7 +253,7 @@ void left_arm_hold_object(){
   delay(500);
  
   L_SERVO_MOTOR_ARM2_2.write(100); // Arm 2
- delay(500);
+  delay(500);
   L_SERVO_MOTOR_ARM2_2.write(135); // Arm 2
   delay(200);
   L_SERVO_MOTOR_WRIST_3.write(0); // Wrist
