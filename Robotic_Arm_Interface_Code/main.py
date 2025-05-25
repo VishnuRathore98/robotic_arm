@@ -242,8 +242,8 @@ with gr.Blocks() as app:
                 left_arm_button_claw = gr.Button("Set Claw")
         
             left_arm_button_set_default_position = gr.Button("Set Default Position")
-            left_arm_button_hold_object = gr.Button("Hold Object")
-            left_arm_button_fold_object = gr.Button("Fold Object")
+            left_arm_button_hold_object = gr.Button("Fold 3")
+            left_arm_button_fold_object = gr.Button("Fold 1")
 
             left_arm_button_base.click(fn=set_left_arm_base_angle, inputs=left_arm_input_base)
             left_arm_button_arm1.click(fn=set_left_arm_arm1_angle, inputs=left_arm_input_arm1)
@@ -273,8 +273,8 @@ with gr.Blocks() as app:
                 right_arm_button_claw = gr.Button("Set Claw")
         
             right_arm_button_set_default_position = gr.Button("Set Default Position")
-            right_arm_button_hold_object = gr.Button("Hold Object")
-            right_arm_button_fold_object = gr.Button("Fold Object")
+            right_arm_button_hold_object = gr.Button("Fold 4")
+            right_arm_button_fold_object = gr.Button("Fold 2")
 
             right_arm_button_base.click(fn=set_right_arm_base_angle, inputs=right_arm_input_base)
             right_arm_button_arm1.click(fn=set_right_arm_arm1_angle, inputs=right_arm_input_arm1)

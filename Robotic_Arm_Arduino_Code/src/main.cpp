@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <Servo.h>
 #include <ArduinoJson.h>
-
+ 
 // Left Arm
 #define L_SERVO_PIN_BASE_0 2  
 #define L_SERVO_PIN_ARM1_1 3  
@@ -218,8 +218,8 @@ void left_arm_set_default_position(){
   
 
   // move claw left to 90
-      if(left_arm_claw_angle!=110)
-       L_SERVO_MOTOR_CLAW_4.write(110);
+      if(left_arm_claw_angle!=140)
+       L_SERVO_MOTOR_CLAW_4.write(140);
       delay(200);
 
 
@@ -246,36 +246,64 @@ void left_arm_set_default_position(){
 }
 
 void left_arm_hold_object(){
+  
+  // XII
+  L_SERVO_MOTOR_CLAW_4.write(120); // Left claw
+  delay(400);
+  // XIII
+  L_SERVO_MOTOR_BASE_0.write(85); // Base
+  delay(400);
+  L_SERVO_MOTOR_BASE_0.write(65); // Base
+  delay(400);
+  // XIV
+  L_SERVO_MOTOR_CLAW_4.write(100); // Left claw
+  delay(400);
 
-  L_SERVO_MOTOR_BASE_0.write(0); // Base
-  delay(200);
-  L_SERVO_MOTOR_ARM1_1.write(20); // Arm 1
-  delay(500);
- 
-  L_SERVO_MOTOR_ARM2_2.write(100); // Arm 2
-  delay(500);
-  L_SERVO_MOTOR_ARM2_2.write(135); // Arm 2
-  delay(200);
+  // R_SERVO_MOTOR_BASE_0.write(30);
+  // delay(400);
+
+  L_SERVO_MOTOR_ARM1_1.write(15);
+  delay(400);  
+  L_SERVO_MOTOR_ARM2_2.write(105);
+  delay(400);
+  L_SERVO_MOTOR_WRIST_3.write(180);
+  delay(400);
+  L_SERVO_MOTOR_BASE_0.write(95); // Base
+  delay(400);
+  L_SERVO_MOTOR_WRIST_3.write(0);
+  delay(400);
+
+
+  // XV
   L_SERVO_MOTOR_WRIST_3.write(0); // Wrist
-  delay(200);
-  L_SERVO_MOTOR_CLAW_4.write(90); // Left claw
-  delay(1000);
+  delay(400);
 
   Serial.println("hold_object called");
 }
 
 void left_arm_fold_object(){
-  
-  L_SERVO_MOTOR_ARM2_2.write(135); // Arm 2
-  delay(200);
-  L_SERVO_MOTOR_ARM1_1.write(20); // Arm 1
-  delay(200);
-  L_SERVO_MOTOR_BASE_0.write(0); // Base
-  delay(200);
-  L_SERVO_MOTOR_WRIST_3.write(180); // Wrist
-  delay(200);
+  // I
+  L_SERVO_MOTOR_BASE_0.write(140); // Base
+  delay(400);
+  // II
+  L_SERVO_MOTOR_ARM1_1.write(90); // Arm 1
+  delay(400);
+  L_SERVO_MOTOR_ARM1_1.write(45); // Arm 1
+  delay(400);
+  L_SERVO_MOTOR_ARM1_1.write(10); // Arm 1
+  delay(400);
+  // III
+  L_SERVO_MOTOR_BASE_0.write(110); // Base
+  delay(400);
+  // IV
   L_SERVO_MOTOR_CLAW_4.write(90); // Left claw
-  delay(200);
+  delay(400);
+  // V
+  L_SERVO_MOTOR_WRIST_3.write(180); // Wrist
+  delay(400);
+  // VI
+  L_SERVO_MOTOR_ARM1_1.write(0); // Arm 2
+  delay(400);
 
   Serial.println("fold_object called");
 }
@@ -353,8 +381,8 @@ void right_arm_set_default_position(){
   
 
   // move claw left to 90
-      if(right_arm_claw_angle!=60)
-       R_SERVO_MOTOR_CLAW_4.write(60);
+      if(right_arm_claw_angle!=30)
+       R_SERVO_MOTOR_CLAW_4.write(30);
       delay(200);
 
   // move arm1 to 90
@@ -381,32 +409,60 @@ void right_arm_set_default_position(){
 
 void right_arm_hold_object(){
 
-  R_SERVO_MOTOR_BASE_0.write(0); // Base
-  delay(200);
-  R_SERVO_MOTOR_ARM1_1.write(25); // Arm 1
-  delay(200);
-  R_SERVO_MOTOR_ARM2_2.write(125); // Arm 2
-  delay(200);
-  R_SERVO_MOTOR_WRIST_3.write(180); // Wrist
-  delay(200);
-  R_SERVO_MOTOR_CLAW_4.write(105); // Left claw
-  delay(200);
-
+  R_SERVO_MOTOR_BASE_0.write(20);
+  delay(400);
+  R_SERVO_MOTOR_ARM1_1.write(90);
+  delay(400);
+  R_SERVO_MOTOR_BASE_0.write(40);
+  delay(400);
+  R_SERVO_MOTOR_ARM2_2.write(45);
+  delay(400);
+  R_SERVO_MOTOR_ARM2_2.write(15);
+  delay(400);
+  R_SERVO_MOTOR_ARM2_2.write(0);
+  delay(400);
+  R_SERVO_MOTOR_ARM1_1.write(105);
+  delay(400);
+  
   Serial.println("hold_object called");
 }
 
 void right_arm_fold_object(){
-  
-  R_SERVO_MOTOR_ARM2_2.write(125); // Arm 2
-  delay(200);
-  R_SERVO_MOTOR_ARM1_1.write(25); // Arm 1
-  delay(200);
-  R_SERVO_MOTOR_BASE_0.write(0); // Base
-  delay(200);
-  R_SERVO_MOTOR_WRIST_3.write(0); // Wrist
-  delay(200);
-  R_SERVO_MOTOR_CLAW_4.write(110); // Left claw
-  delay(200);
+  // 
+  R_SERVO_MOTOR_CLAW_4.write(80); // Left claw added
+  delay(400);
+
+  // VII
+  R_SERVO_MOTOR_BASE_0.write(25); // Base
+  delay(400);
+  // VIII
+  R_SERVO_MOTOR_ARM1_1.write(145); // Arm 1 140->145
+  delay(400);
+  // IX
+  R_SERVO_MOTOR_ARM2_2.write(43); // Arm 2 55->45->40
+  delay(400);
+
+  // added
+
+  R_SERVO_MOTOR_ARM1_1.write(145); // Arm 1 140->145
+  delay(400);
+  // IX
+  R_SERVO_MOTOR_ARM2_2.write(45); // Arm 2 55->45->40
+  delay(400);
+
+  R_SERVO_MOTOR_BASE_0.write(40);
+  delay(400);
+
+  R_SERVO_MOTOR_WRIST_3.write(0);
+  delay(400);
+
+
+  // // X
+  // R_SERVO_MOTOR_BASE_0.write(50); // Base
+  // delay(400);
+  // // XI
+  // R_SERVO_MOTOR_ARM2_2.write(40); // Arm 2
+  // delay(400);
 
   Serial.println("fold_object called");
 }
