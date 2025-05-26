@@ -38,6 +38,7 @@ void left_arm_claw(int angle);
 void left_arm_set_default_position();
 void left_arm_hold_object();
 void left_arm_fold_object();
+void left_arm_pick_object();
 
 // ------------------------------------- Right Arm
 
@@ -245,6 +246,7 @@ void left_arm_set_default_position(){
 
 }
 
+// Fold 4
 void left_arm_hold_object(){
   
   // XII
@@ -256,8 +258,8 @@ void left_arm_hold_object(){
   L_SERVO_MOTOR_BASE_0.write(65); // Base
   delay(400);
   // XIV
-  L_SERVO_MOTOR_CLAW_4.write(100); // Left claw
-  delay(400);
+  // L_SERVO_MOTOR_CLAW_4.write(100); // Left claw
+  // delay(400);
 
   // R_SERVO_MOTOR_BASE_0.write(30);
   // delay(400);
@@ -268,8 +270,12 @@ void left_arm_hold_object(){
   delay(400);
   L_SERVO_MOTOR_WRIST_3.write(180);
   delay(400);
-  L_SERVO_MOTOR_BASE_0.write(95); // Base
+  L_SERVO_MOTOR_BASE_0.write(98); // Base
   delay(400);
+
+  L_SERVO_MOTOR_CLAW_4.write(90);
+  delay(400);
+
   L_SERVO_MOTOR_WRIST_3.write(0);
   delay(400);
 
@@ -281,6 +287,7 @@ void left_arm_hold_object(){
   Serial.println("hold_object called");
 }
 
+// Fold 1
 void left_arm_fold_object(){
   // I
   L_SERVO_MOTOR_BASE_0.write(140); // Base
@@ -293,7 +300,7 @@ void left_arm_fold_object(){
   L_SERVO_MOTOR_ARM1_1.write(10); // Arm 1
   delay(400);
   // III
-  L_SERVO_MOTOR_BASE_0.write(110); // Base
+  L_SERVO_MOTOR_BASE_0.write(108); // Base
   delay(400);
   // IV
   L_SERVO_MOTOR_CLAW_4.write(90); // Left claw
@@ -308,6 +315,20 @@ void left_arm_fold_object(){
   Serial.println("fold_object called");
 }
 
+void left_arm_pick_object(){
+  // Get in position
+
+
+  // Hold the object
+
+
+  // Pick the object
+
+  
+  // Serve the object
+
+
+}
 
 // ------------------------------ Right Arm
 
@@ -409,6 +430,9 @@ void right_arm_set_default_position(){
 
 void right_arm_hold_object(){
 
+  R_SERVO_MOTOR_ARM2_2.write(50);
+  delay(400);
+
   R_SERVO_MOTOR_BASE_0.write(20);
   delay(400);
   R_SERVO_MOTOR_ARM1_1.write(90);
@@ -427,6 +451,7 @@ void right_arm_hold_object(){
   Serial.println("hold_object called");
 }
 
+// Fold 2
 void right_arm_fold_object(){
   // 
   R_SERVO_MOTOR_CLAW_4.write(80); // Left claw added
@@ -450,7 +475,7 @@ void right_arm_fold_object(){
   R_SERVO_MOTOR_ARM2_2.write(45); // Arm 2 55->45->40
   delay(400);
 
-  R_SERVO_MOTOR_BASE_0.write(40);
+  R_SERVO_MOTOR_BASE_0.write(42);
   delay(400);
 
   R_SERVO_MOTOR_WRIST_3.write(0);
