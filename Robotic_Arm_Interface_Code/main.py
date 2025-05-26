@@ -221,7 +221,16 @@ def right_arm_leave_leaf():
     ...
 
 
+def fold_object():
+    left_arm_fold_object()
+    right_arm_fold_object()
+    left_arm_hold_object()
+    right_arm_hold_object()
+
 with gr.Blocks() as app:
+    with gr.Column():
+        gr.Markdown("# **Click the button below to fold the object**")
+        both_arm_folding = gr.Button("Fold the object")
     with gr.Row():
         with gr.Column():
             gr.Markdown("# **Left Arm**")
@@ -253,6 +262,7 @@ with gr.Blocks() as app:
             left_arm_button_set_default_position.click(fn=set_left_arm_default_position)
             left_arm_button_hold_object.click(fn=left_arm_hold_object)
             left_arm_button_fold_object.click(fn=left_arm_fold_object)
+            both_arm_folding.click(fn=fold_object)
             
         with gr.Column():
             gr.Markdown("# **Right Arm**")
