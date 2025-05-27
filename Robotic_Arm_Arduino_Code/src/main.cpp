@@ -51,6 +51,7 @@ void right_arm_claw(int angle);
 void right_arm_set_default_position();
 void right_arm_hold_object();
 void right_arm_fold_object();
+void rotate_smoothly(int, int, int, Servo);
 
 
 void setup(){
@@ -246,12 +247,13 @@ void left_arm_set_default_position(){
 
 }
 
-// Fold 4
+// Fold 3
 void left_arm_hold_object(){
-  
+
   // XII
-  L_SERVO_MOTOR_CLAW_4.write(120); // Left claw
+  L_SERVO_MOTOR_CLAW_4.write(80); // Left claw
   delay(400);
+  // rotate_smoothly();
   // XIII
   L_SERVO_MOTOR_BASE_0.write(85); // Base
   delay(400);
@@ -334,7 +336,11 @@ void left_arm_pick_object(){
 
 
 void right_arm_base(int angle){
-  R_SERVO_MOTOR_BASE_0.write(angle);
+  int start_angle = R_SERVO_MOTOR_BASE_0.read();
+  int end_angle = angle;
+  int time_duration = 4;
+  Servo motor = R_SERVO_MOTOR_BASE_0;
+  rotate_smoothly(start_angle, end_angle, time_duration, motor);
   Serial.print("Base at: ");
   Serial.println(angle);
 }
@@ -428,6 +434,7 @@ void right_arm_set_default_position(){
 
 }
 
+// Fold 4
 void right_arm_hold_object(){
 
   R_SERVO_MOTOR_ARM2_2.write(50);
@@ -464,16 +471,16 @@ void right_arm_fold_object(){
   R_SERVO_MOTOR_ARM1_1.write(145); // Arm 1 140->145
   delay(400);
   // IX
-  R_SERVO_MOTOR_ARM2_2.write(43); // Arm 2 55->45->40
+  R_SERVO_MOTOR_ARM2_2.write(58); // Arm 2 55->45->40
   delay(400);
 
   // added
 
-  R_SERVO_MOTOR_ARM1_1.write(145); // Arm 1 140->145
-  delay(400);
-  // IX
-  R_SERVO_MOTOR_ARM2_2.write(45); // Arm 2 55->45->40
-  delay(400);
+  // R_SERVO_MOTOR_ARM1_1.write(145); // Arm 1 140->145
+  // delay(400);
+  // // IX
+  // R_SERVO_MOTOR_ARM2_2.write(45); // Arm 2 55->45->40
+  // delay(400);
 
   R_SERVO_MOTOR_BASE_0.write(42);
   delay(400);
@@ -490,4 +497,14 @@ void right_arm_fold_object(){
   // delay(400);
 
   Serial.println("fold_object called");
+}
+
+void rotate_smoothly(int start_angle, int end_angle,  int time_duration, Servo motor){
+
+  for (int i = start_angle; i <= end_angle; i++)
+  {
+    motor.write(i);
+    delay(time_duration);
+  }
+  
 }
