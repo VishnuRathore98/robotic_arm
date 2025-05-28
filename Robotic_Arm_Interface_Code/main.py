@@ -6,21 +6,25 @@ import json
 try:
     arduino = sr.Serial(port='/dev/ttyUSB0', baudrate=9600, timeout=.1)
     time.sleep(2)
+    print("Connected to USB0 port")
 except Exception as e:
     print("port ttyUSB0 not available")
     try:
         arduino = sr.Serial(port='/dev/ttyACM0', baudrate=9600, timeout=.1)
         time.sleep(2)
+        print("Connected to ACM0 port")
     except:
         print("port ttyACM0 not available")
         try:
             arduino = sr.Serial(port='/dev/ttyACM1', baudrate=9600, timeout=.1)
             time.sleep(2)
+            print("Connected to ACM1 port")
         except:
             print("port ttyACM1 not available")
             try:
                 arduino = sr.Serial(port='/dev/ttyACM2', baudrate=9600, timeout=.1)
                 time.sleep(2)
+                print("Connected to ACM2 port")
             except:
                 print("port ttyACM2 not available")
                 
@@ -99,23 +103,23 @@ def set_left_arm_default_position():
     arduino.write(json_str.encode())
     print("Set default position")
 
-def left_arm_hold_object():
+def left_arm_fold3_object():
     data = {
-        "motor":"l_hold_object",
+        "motor":"l_fold3_object",
         "angle":"0"
     }
     json_str = json.dumps(data)+'\n'
     arduino.write(json_str.encode())   
-    print("Hold Object")
+    print("Fold3 Object")
 
-def left_arm_fold_object():
+def left_arm_fold1_object():
     data = {
-        "motor":"l_fold_object",
+        "motor":"l_fold1_object",
         "angle":"0"
     }
     json_str = json.dumps(data)+'\n'
     arduino.write(json_str.encode())
-    print("Fold Object")
+    print("Fold1 Object")
     
 
 def left_arm_leave_leaf():
@@ -198,34 +202,34 @@ def set_right_arm_default_position():
     arduino.write(json_str.encode())
     print("Set default position")
 
-def right_arm_hold_object():
+def right_arm_fold4_object():
     data = {
-        "motor":"r_hold_object",
+        "motor":"r_fold4_object",
         "angle":"0"
     }
     json_str = json.dumps(data)+'\n'
     arduino.write(json_str.encode())   
-    print("Hold Object")
+    print("Fold4 Object")
 
-def right_arm_fold_object():
+def right_arm_fold2_object():
     data = {
-        "motor":"r_fold_object",
+        "motor":"r_fold2_object",
         "angle":"0"
     }
     json_str = json.dumps(data)+'\n'
     arduino.write(json_str.encode())
-    print("Fold Object")
+    print("Fold2 Object")
 
 
 def right_arm_leave_leaf():
     ...
 
 
-def fold_object():
-    left_arm_fold_object()
-    right_arm_fold_object()
-    left_arm_hold_object()
-    right_arm_hold_object()
+def fold_object(): ...
+    # left_arm_fold_object()
+    # right_arm_fold_object()
+    # left_arm_hold_object()
+    # right_arm_hold_object()
 
 with gr.Blocks() as app:
     with gr.Column():
@@ -251,8 +255,8 @@ with gr.Blocks() as app:
                 left_arm_button_claw = gr.Button("Set Claw")
         
             left_arm_button_set_default_position = gr.Button("Set Default Position")
-            left_arm_button_hold_object = gr.Button("Fold 3")
-            left_arm_button_fold_object = gr.Button("Fold 1")
+            left_arm_button_fold3_object = gr.Button("Fold 3")
+            left_arm_button_fold1_object = gr.Button("Fold 1")
 
             left_arm_button_base.click(fn=set_left_arm_base_angle, inputs=left_arm_input_base)
             left_arm_button_arm1.click(fn=set_left_arm_arm1_angle, inputs=left_arm_input_arm1)
@@ -260,8 +264,8 @@ with gr.Blocks() as app:
             left_arm_button_wrist.click(fn=set_left_arm_wrist_angle, inputs=left_arm_input_wrist)
             left_arm_button_claw.click(fn=set_left_arm_claw_angle, inputs=left_arm_input_claw)
             left_arm_button_set_default_position.click(fn=set_left_arm_default_position)
-            left_arm_button_hold_object.click(fn=left_arm_hold_object)
-            left_arm_button_fold_object.click(fn=left_arm_fold_object)
+            left_arm_button_fold3_object.click(fn=left_arm_fold3_object)
+            left_arm_button_fold1_object.click(fn=left_arm_fold1_object)
             both_arm_folding.click(fn=fold_object)
             
         with gr.Column():
@@ -283,8 +287,8 @@ with gr.Blocks() as app:
                 right_arm_button_claw = gr.Button("Set Claw")
         
             right_arm_button_set_default_position = gr.Button("Set Default Position")
-            right_arm_button_hold_object = gr.Button("Fold 4")
-            right_arm_button_fold_object = gr.Button("Fold 2")
+            right_arm_button_fold4_object = gr.Button("Fold 4")
+            right_arm_button_fold2_object = gr.Button("Fold 2")
 
             right_arm_button_base.click(fn=set_right_arm_base_angle, inputs=right_arm_input_base)
             right_arm_button_arm1.click(fn=set_right_arm_arm1_angle, inputs=right_arm_input_arm1)
@@ -292,6 +296,6 @@ with gr.Blocks() as app:
             right_arm_button_wrist.click(fn=set_right_arm_wrist_angle, inputs=right_arm_input_wrist)
             right_arm_button_claw.click(fn=set_right_arm_claw_angle, inputs=right_arm_input_claw)
             right_arm_button_set_default_position.click(fn=set_right_arm_default_position)
-            right_arm_button_hold_object.click(fn=right_arm_hold_object)
-            right_arm_button_fold_object.click(fn=right_arm_fold_object)
+            right_arm_button_fold4_object.click(fn=right_arm_fold4_object)
+            right_arm_button_fold2_object.click(fn=right_arm_fold2_object)
 app.launch()
