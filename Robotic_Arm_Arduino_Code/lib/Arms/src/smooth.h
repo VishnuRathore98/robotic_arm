@@ -1,10 +1,10 @@
 // smoothify.h
-// #ifndef SMOOTHIFY_H
-// #define SMOOTHIFY_H
+#ifndef SMOOTH_H
+#define SMOOTH_H
 
 
 #include <Servo.h>
 
-void rotate_smoothly(int start_angle, int end_angle, Servo& motor, int wait=10);
+void rotate_smoothly(int start_angle, int end_angle, Servo& motor, int wait=4);
 
-// #endif
+#endif

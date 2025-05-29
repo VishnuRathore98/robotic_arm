@@ -18,7 +18,7 @@ void rotate_smoothly(int start_angle, int end_angle, Servo& motor, int wait)
       Serial.println(i);
 
       motor.write(i);
-      delay(wait);
+      // delay(wait);
     }
   }
 
@@ -33,7 +33,7 @@ else if (start_angle < end_angle)
     {
       Serial.println(i);
       motor.write(i);
-      delay(wait);
+      // delay(wait);
     }
   }
 }

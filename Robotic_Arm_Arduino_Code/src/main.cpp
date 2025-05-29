@@ -60,6 +60,11 @@ void loop()
     else if (motor == "l_fold1_object")
       left_arm_fold1_object();
 
+    else if (motor == "l_fold4_object")
+      left_arm_fold4_object();
+
+    
+
     // --------- Right Arm Code ---------------
 
     if (motor == "r_base")
@@ -85,6 +90,10 @@ void loop()
 
     else if (motor == "r_fold2_object")
       right_arm_fold2_object();
+
+    else if (motor == "r_pick_object")
+      right_arm_pick_object();
+    
 
     else
     {

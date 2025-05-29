@@ -1,6 +1,6 @@
 // pins.h
-// #ifndef PINS_H
-// #define PINS_H
+#ifndef PINS_H
+#define PINS_H
 
 /*
     The following pins are for Arduino mega, all are pwm pins.
@@ -21,4 +21,4 @@
 #define R_SERVO_PIN_CLAW_4 12
 
 
-// #endif
+#endif

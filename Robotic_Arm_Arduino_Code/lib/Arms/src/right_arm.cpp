@@ -42,8 +42,7 @@ void right_arm_arm1(int angle){
   Serial.println(angle);
 }
 
-void right_arm_arm2(int angle)
-{
+void right_arm_arm2(int angle){
 
   // R_SERVO_MOTOR_ARM2_2.write(angle);
   // --------------------- For smooth movements ---------------------
@@ -56,8 +55,7 @@ void right_arm_arm2(int angle)
   Serial.println(angle);
 }
 
-void right_arm_wrist(int angle)
-{
+void right_arm_wrist(int angle){
 
   // R_SERVO_MOTOR_WRIST_3.write(angle);
   // --------------------- For smooth movements ---------------------
@@ -70,8 +68,7 @@ void right_arm_wrist(int angle)
   Serial.println(angle);
 }
 
-void right_arm_claw(int angle)
-{
+void right_arm_claw(int angle){
 
   // R_SERVO_MOTOR_CLAW_4.write(angle);
   // --------------------- For smooth movements ---------------------
@@ -84,8 +81,7 @@ void right_arm_claw(int angle)
   Serial.println(angle);
 }
 
-void right_arm_set_default_position()
-{
+void right_arm_set_default_position(){
   // servo.read() -> returns the last position value written to the servo
 
   // get base current position
@@ -185,8 +181,7 @@ void right_arm_set_default_position()
 }
 
 // Fold 4 -> Hold the folds
-void right_arm_fold4_object()
-{
+void right_arm_fold4_object(){
   int start_angle;
   int end_angle;
   Servo motor;
@@ -317,4 +312,15 @@ void right_arm_fold2_object(){
   // -----------------------------------------------------------------
 
   Serial.println("fold_object called");
+}
+
+// Pick Object and Serve
+void right_arm_pick_object(){
+  // Get in position
+
+  // Hold the object
+
+  // Pick the object
+
+  // Serve the object
 }
