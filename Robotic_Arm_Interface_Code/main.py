@@ -303,7 +303,7 @@ with gr.Blocks() as app:
         
             right_arm_button_set_default_position = gr.Button("Set Default Position")
             right_arm_button_fold2_object = gr.Button("Fold 2")
-            right_arm_button_fold4_object = gr.Button("Fold 4")
+            right_arm_button_fold4_object = gr.Button("Hold Object")
             right_arm_button_pick_object = gr.Button("Pick Object")
 
             right_arm_button_base.click(fn=set_right_arm_base_angle, inputs=right_arm_input_base)

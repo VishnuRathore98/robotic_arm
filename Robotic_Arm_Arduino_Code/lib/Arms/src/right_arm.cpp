@@ -1,8 +1,8 @@
 // right_arm.cpp
 #include <Arduino.h>
+#include <Servo.h>
 #include "smooth.h"
 #include "right_arm.h"
-#include <Servo.h>
 #include "pins.h"
 
 Servo R_SERVO_MOTOR_BASE_0;
@@ -290,7 +290,7 @@ void right_arm_fold2_object(){
   // R_SERVO_MOTOR_ARM2_2.write(58); // Arm 2 55->45->40
   // --------------------- For smooth movements ---------------------
   start_angle = R_SERVO_MOTOR_ARM2_2.read();
-  end_angle = 58;
+  end_angle = 50;
   motor = R_SERVO_MOTOR_ARM2_2;
   rotate_smoothly(start_angle, end_angle, motor);
   // -----------------------------------------------------------------
@@ -298,29 +298,134 @@ void right_arm_fold2_object(){
   // R_SERVO_MOTOR_BASE_0.write(42);
   // --------------------- For smooth movements ---------------------
   start_angle = R_SERVO_MOTOR_BASE_0.read();
-  end_angle = 42;
+  end_angle = 45;
   motor = R_SERVO_MOTOR_BASE_0;
   rotate_smoothly(start_angle, end_angle, motor);
   // -----------------------------------------------------------------
 
+  // -----------------------------------------------------------------
+
+  start_angle = R_SERVO_MOTOR_ARM2_2.read();
+  end_angle = 60;
+  motor = R_SERVO_MOTOR_ARM2_2;
+  rotate_smoothly(start_angle, end_angle, motor);
+
+  // -----------------------------------------------------------------
+
   // R_SERVO_MOTOR_WRIST_3.write(0);
-  // --------------------- For smooth movements ---------------------
+  // --------------------- F/* code */or smooth movements ---------------------
   start_angle = R_SERVO_MOTOR_WRIST_3.read();
   end_angle = 0;
   motor = R_SERVO_MOTOR_WRIST_3;
   rotate_smoothly(start_angle, end_angle, motor);
   // -----------------------------------------------------------------
 
+  start_angle = R_SERVO_MOTOR_ARM2_2.read();
+  end_angle = 58;
+  motor = R_SERVO_MOTOR_ARM2_2;
+  rotate_smoothly(start_angle, end_angle, motor);
+
   Serial.println("fold_object called");
 }
 
-// Pick Object and Serve
+// Pick and Serve
 void right_arm_pick_object(){
+  int start_angle;
+  int end_angle;
+  Servo motor;
+
   // Get in position
+  
+  // Set base
+  start_angle = R_SERVO_MOTOR_BASE_0.read();
+  end_angle = 90;
+  motor = R_SERVO_MOTOR_BASE_0;
+  rotate_smoothly(start_angle, end_angle, motor, 10);
+
+  // Set Arm1
+  start_angle = R_SERVO_MOTOR_ARM1_1.read();
+  end_angle = 90;
+  motor = R_SERVO_MOTOR_ARM1_1;
+  rotate_smoothly(start_angle, end_angle, motor, 10);
+
+  // Set Arm2
+  start_angle = R_SERVO_MOTOR_ARM2_2.read();
+  end_angle = 90;
+  motor = R_SERVO_MOTOR_ARM2_2;
+  rotate_smoothly(start_angle, end_angle, motor, 10);
+
+  start_angle = R_SERVO_MOTOR_BASE_0.read();
+  end_angle = 20;
+  motor = R_SERVO_MOTOR_BASE_0;
+  rotate_smoothly(start_angle, end_angle, motor, 10);
+
+
+  // Set Claw
+  start_angle = R_SERVO_MOTOR_CLAW_4.read();
+  end_angle = 30;
+  motor = R_SERVO_MOTOR_CLAW_4;
+  rotate_smoothly(start_angle, end_angle, motor, 10);
 
   // Hold the object
 
+  //Hold
+
+    // Set Arm1
+  start_angle = R_SERVO_MOTOR_ARM1_1.read();
+  end_angle = 90;
+  motor = R_SERVO_MOTOR_ARM1_1;
+  rotate_smoothly(start_angle, end_angle, motor, 10);
+
+  // Set Arm2
+  start_angle = R_SERVO_MOTOR_ARM2_2.read();
+  end_angle = 0;
+  motor = R_SERVO_MOTOR_ARM2_2;
+  rotate_smoothly(start_angle, end_angle, motor, 10);
+
+  start_angle = R_SERVO_MOTOR_BASE_0.read();
+  end_angle = 10;
+  motor = R_SERVO_MOTOR_BASE_0;
+  rotate_smoothly(start_angle, end_angle, motor, 10);
+
+  start_angle = R_SERVO_MOTOR_CLAW_4.read();
+  end_angle = 70;
+  motor = R_SERVO_MOTOR_CLAW_4;
+  rotate_smoothly(start_angle, end_angle, motor, 10);
+
   // Pick the object
 
+  start_angle = R_SERVO_MOTOR_BASE_0.read();
+  end_angle = 20;
+  motor = R_SERVO_MOTOR_BASE_0;
+  rotate_smoothly(start_angle, end_angle, motor, 10);
+
   // Serve the object
+
+
+    // Set Arm1
+  start_angle = R_SERVO_MOTOR_ARM1_1.read();
+  end_angle = 90;
+  motor = R_SERVO_MOTOR_ARM1_1;
+  rotate_smoothly(start_angle, end_angle, motor, 10);
+
+  // Set Arm2
+  start_angle = R_SERVO_MOTOR_ARM2_2.read();
+  end_angle = 90;
+  motor = R_SERVO_MOTOR_ARM2_2;
+  rotate_smoothly(start_angle, end_angle, motor, 10);
+
+
+  // Set base
+  start_angle = R_SERVO_MOTOR_BASE_0.read();
+  end_angle = 180;
+  motor = R_SERVO_MOTOR_BASE_0;
+  rotate_smoothly(start_angle, end_angle, motor, 10);
+
+
+  // Set Wrist
+  start_angle = R_SERVO_MOTOR_WRIST_3.read();
+  end_angle = 0;
+  motor = R_SERVO_MOTOR_WRIST_3;
+  rotate_smoothly(start_angle, end_angle, motor, 10);
+  
 }
