@@ -23,5 +23,6 @@
 #define R_SERVO_PIN_WRIST_3 11
 #define R_SERVO_PIN_CLAW_4 12
 
+#define R_SERVO_PIN_HOLD_OBJECT 13
 
 #endif

@@ -21,8 +21,7 @@ void attach_left_arm_servos(){
   L_SERVO_FOURTH_FOLD_CLAW.attach(L_FOURTH_FOLD_CLAW_PIN); //fourth fold claw
 }
 
-void left_arm_base(int angle)
-{
+void left_arm_base(int angle){
   // --------------------- For smooth movements ---------------------
   int start_angle = L_SERVO_MOTOR_BASE_0.read();
   int end_angle = angle;
@@ -34,8 +33,7 @@ void left_arm_base(int angle)
   Serial.println(angle);
 }
 
-void left_arm_arm1(int angle)
-{
+void left_arm_arm1(int angle){
   // --------------------- For smooth movements ---------------------
   int start_angle = L_SERVO_MOTOR_ARM1_1.read();
   int end_angle = angle;
@@ -48,8 +46,7 @@ void left_arm_arm1(int angle)
   Serial.println(angle);
 }
 
-void left_arm_arm2(int angle)
-{
+void left_arm_arm2(int angle){
   // --------------------- For smooth movements ---------------------
   int start_angle = L_SERVO_MOTOR_ARM2_2.read();
   int end_angle = angle;
@@ -61,8 +58,7 @@ void left_arm_arm2(int angle)
   Serial.println(angle);
 }
  
-void left_arm_wrist(int angle)
-{
+void left_arm_wrist(int angle){
   // --------------------- For smooth movements ---------------------
   int start_angle = L_SERVO_MOTOR_WRIST_3.read();
   int end_angle = angle;
@@ -74,8 +70,7 @@ void left_arm_wrist(int angle)
   Serial.println(angle);
 }
 
-void left_arm_claw(int angle)
-{
+void left_arm_claw(int angle){
   // --------------------- For smooth movements ---------------------
   int start_angle = L_SERVO_MOTOR_CLAW_4.read();
   int end_angle = angle;
@@ -128,11 +123,11 @@ void left_arm_set_default_position(){
   Serial.println(fourth_claw_angle);
 
   // move claw left
-  if (left_arm_claw_angle != 0)
+  if (left_arm_claw_angle != 95)
   {
     // --------------------- For smooth movements ---------------------
     int start_angle = left_arm_base_angle;
-    int end_angle = 0;
+    int end_angle = 95;
     Servo motor = L_SERVO_MOTOR_CLAW_4;
     rotate_smoothly(start_angle, end_angle, motor);
     // -----------------------------------------------------------------
@@ -238,7 +233,7 @@ void left_arm_fold1_object(){
   // ----------------------------------------------------------------
 
   start_angle = L_SERVO_MOTOR_CLAW_4.read();
-  end_angle = 95;
+  end_angle = 100;
   motor = L_SERVO_MOTOR_CLAW_4;
   rotate_smoothly(start_angle, end_angle, motor);
 
@@ -284,14 +279,6 @@ void left_arm_fold3_object(){
   rotate_smoothly(start_angle, end_angle, motor);
 
 // ---------------------------
-
-  // --------------------- For smooth movements ---------------------
-  // start_angle = L_SERVO_MOTOR_BASE_0.read();
-  // end_angle = 85;
-  // motor = L_SERVO_MOTOR_BASE_0;
-  // rotate_smoothly(start_angle, end_angle, motor, 10);
-  // -----------------------------------------------------------------
-
 
   // --------------------- For smooth movements ---------------------
   start_angle = L_SERVO_MOTOR_BASE_0.read();
@@ -371,4 +358,18 @@ void left_arm_fold4_object(){
   end_angle = 135;
   motor = L_SERVO_FOURTH_FOLD_CLAW;
   rotate_smoothly(start_angle, end_angle, motor,10);
+}
+
+void left_arm_unfold(){
+  int start_angle;
+  int end_angle;
+  Servo motor;
+
+  // Fold the Arm2 
+  start_angle = L_SERVO_MOTOR_ARM2_2.read();
+  end_angle = 45;
+  motor = L_SERVO_MOTOR_ARM2_2;
+  rotate_smoothly(start_angle, end_angle, motor, 10);
+
+  left_arm_set_default_position();
 }

@@ -132,6 +132,16 @@ def left_arm_fold4_object():
     arduino.write(json_str.encode())
     print("Fold4 Object")
 
+
+def left_arm_unfold_arm():
+    data = {
+        "motor":"l_unfold_arm",
+        "angle":"0"
+    }
+    json_str = json.dumps(data)+'\n' 
+    arduino.write(json_str.encode())
+
+
 # ------------------------------------------Right Arm Code---------------------------------
 
 def set_right_arm_base_angle(angle):
@@ -208,14 +218,14 @@ def set_right_arm_default_position():
     arduino.write(json_str.encode())
     print("Set default position")
 
-def right_arm_hold_object():
+def right_arm_unfold_object():
     data = {
-        "motor":"r_fold4_object",
+        "motor":"r_unfold_object",
         "angle":"0"
     }
     json_str = json.dumps(data)+'\n'
     arduino.write(json_str.encode())   
-    print("Fold4 Object")
+    print("Unfold right arm")
 
 def right_arm_fold2_object():
     data = {
@@ -234,6 +244,17 @@ def right_arm_pick_object():
     json_str = json.dumps(data)+'\n' 
     arduino.write(json_str.encode())
     print("Pick Object")
+
+def right_arm_hold_object():
+    data = {
+        "motor":"r_hold_object",
+        "angle":"0"
+    }
+    json_str = json.dumps(data)+'\n' 
+    arduino.write(json_str.encode())
+    
+
+
 
 def fold_object():
     # left_arm_fold_object()
@@ -271,6 +292,7 @@ with gr.Blocks() as app:
             left_arm_button_fold1_object = gr.Button("Fold 1")
             left_arm_button_fold3_object = gr.Button("Fold 3")
             left_arm_button_fold4_object = gr.Button("Fold 4")
+            left_arm_button_unfold_arm = gr.Button("Unfold Left Arm")
 
             left_arm_button_base.click(fn=set_left_arm_base_angle, inputs=left_arm_input_base)
             left_arm_button_arm1.click(fn=set_left_arm_arm1_angle, inputs=left_arm_input_arm1)
@@ -281,6 +303,7 @@ with gr.Blocks() as app:
             left_arm_button_fold3_object.click(fn=left_arm_fold3_object)
             left_arm_button_fold1_object.click(fn=left_arm_fold1_object)
             left_arm_button_fold4_object.click(fn=left_arm_fold4_object)
+            left_arm_button_unfold_arm.click(fn=left_arm_unfold_arm)
             both_arm_folding.click(fn=fold_object)
             
         with gr.Column():
@@ -303,7 +326,8 @@ with gr.Blocks() as app:
         
             right_arm_button_set_default_position = gr.Button("Set Default Position")
             right_arm_button_fold2_object = gr.Button("Fold 2")
-            right_arm_button_fold4_object = gr.Button("Hold Object")
+            right_arm_button_unfold_object = gr.Button("Unfold Right Arm")
+            right_arm_button_hold_object = gr.Button("Hold Object")
             right_arm_button_pick_object = gr.Button("Pick Object")
 
             right_arm_button_base.click(fn=set_right_arm_base_angle, inputs=right_arm_input_base)
@@ -312,7 +336,9 @@ with gr.Blocks() as app:
             right_arm_button_wrist.click(fn=set_right_arm_wrist_angle, inputs=right_arm_input_wrist)
             right_arm_button_claw.click(fn=set_right_arm_claw_angle, inputs=right_arm_input_claw)
             right_arm_button_set_default_position.click(fn=set_right_arm_default_position)
-            right_arm_button_fold4_object.click(fn=right_arm_hold_object)
+            right_arm_button_unfold_object.click(fn=right_arm_unfold_object)
             right_arm_button_fold2_object.click(fn=right_arm_fold2_object)
             right_arm_button_pick_object.click(fn=right_arm_pick_object)
+            right_arm_button_hold_object.click(fn=right_arm_hold_object)
 app.launch()
+
