@@ -306,7 +306,7 @@ void left_arm_fold3_object(){
 
   // --------------------- For smooth movements ---------------------
   start_angle = L_SERVO_MOTOR_ARM2_2.read();
-  end_angle = 80;
+  end_angle = 85;
   motor = L_SERVO_MOTOR_ARM2_2;
   rotate_smoothly(start_angle, end_angle, motor);
   // -----------------------------------------------------------------

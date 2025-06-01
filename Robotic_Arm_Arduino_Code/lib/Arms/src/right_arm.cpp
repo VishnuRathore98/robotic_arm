@@ -32,7 +32,6 @@ void right_arm_base(int angle){
 
 void right_arm_arm1(int angle){
   // 180 - Straight up
-  // R_SERVO_MOTOR_ARM1_1.write(angle);
   // --------------------- For smooth movements ---------------------
   int start_angle = R_SERVO_MOTOR_ARM1_1.read();
   int end_angle = angle;
@@ -45,7 +44,6 @@ void right_arm_arm1(int angle){
 
 void right_arm_arm2(int angle){
 
-  // R_SERVO_MOTOR_ARM2_2.write(angle);
   // --------------------- For smooth movements ---------------------
   int start_angle = R_SERVO_MOTOR_ARM2_2.read();
   int end_angle = angle;
@@ -58,7 +56,6 @@ void right_arm_arm2(int angle){
 
 void right_arm_wrist(int angle){
 
-  // R_SERVO_MOTOR_WRIST_3.write(angle);
   // --------------------- For smooth movements ---------------------
   int start_angle = R_SERVO_MOTOR_WRIST_3.read();
   int end_angle = angle;
@@ -71,7 +68,6 @@ void right_arm_wrist(int angle){
 
 void right_arm_claw(int angle){
 
-  // R_SERVO_MOTOR_CLAW_4.write(angle);
   // --------------------- For smooth movements ---------------------
   int start_angle = R_SERVO_MOTOR_CLAW_4.read();
   int end_angle = angle;
@@ -93,43 +89,33 @@ void right_arm_hold_angle(int angle){
 void right_arm_set_default_position(){
   // servo.read() -> returns the last position value written to the servo
 
-  // get base current position
   int right_arm_base_angle = R_SERVO_MOTOR_BASE_0.read();
-
-  // get arm1 current position
   int right_arm_arm1_angle = R_SERVO_MOTOR_ARM1_1.read();
-
-  // get arm2 current position
   int right_arm_arm2_angle = R_SERVO_MOTOR_ARM2_2.read();
-
-  // get wrist current position
   int right_arm_wrist_angle = R_SERVO_MOTOR_WRIST_3.read();
-
-  // get claw left current position
   int right_arm_claw_angle = R_SERVO_MOTOR_CLAW_4.read();
-
   int right_arm_hold_angle = R_SERVO_HOLD_OBJECT.read();
 
   // print current arm positions
-  Serial.print("Currnt Base angle: ");
-  Serial.println(right_arm_base_angle);
+  // Serial.print("Currnt Base angle: ");
+  // Serial.println(right_arm_base_angle);
 
-  Serial.print("Currnt arm1 angle: ");
-  Serial.println(right_arm_arm1_angle);
+  // Serial.print("Currnt arm1 angle: ");
+  // Serial.println(right_arm_arm1_angle);
 
-  Serial.print("Currnt arm2 angle: ");
-  Serial.println(right_arm_arm2_angle);
+  // Serial.print("Currnt arm2 angle: ");
+  // Serial.println(right_arm_arm2_angle);
 
-  Serial.print("Currnt wrist angle: ");
-  Serial.println(right_arm_wrist_angle);
+  // Serial.print("Currnt wrist angle: ");
+  // Serial.println(right_arm_wrist_angle);
 
-  Serial.print("Currnt left angle: ");
-  Serial.println(right_arm_claw_angle);
+  // Serial.print("Currnt left angle: ");
+  // Serial.println(right_arm_claw_angle);
 
   if (right_arm_hold_angle!=0){
 
   int start_angle = right_arm_hold_angle;
-  int end_angle = 0;
+  int end_angle = 155;
   Servo motor = R_SERVO_HOLD_OBJECT;
 
   rotate_smoothly(start_angle, end_angle, motor, 10);
@@ -238,11 +224,11 @@ void right_arm_unfold_object(){
   rotate_smoothly(start_angle, end_angle, motor);
   // -----------------------------------------------------------------
 
-  start_angle = R_SERVO_HOLD_OBJECT.read();
-  end_angle = 0;
-  motor = R_SERVO_HOLD_OBJECT;
+  // start_angle = R_SERVO_HOLD_OBJECT.read();
+  // end_angle = 0;
+  // motor = R_SERVO_HOLD_OBJECT;
 
-  rotate_smoothly(start_angle, end_angle, motor, 10);
+  // rotate_smoothly(start_angle, end_angle, motor, 10);
 
   Serial.println("hold_object called");
 }
@@ -338,7 +324,7 @@ void right_arm_pick_object(){
 
   // Set Arm1
   start_angle = R_SERVO_MOTOR_ARM1_1.read();
-  end_angle = 90;
+  end_angle = 100;
   motor = R_SERVO_MOTOR_ARM1_1;
   rotate_smoothly(start_angle, end_angle, motor, 10);
 
@@ -350,7 +336,7 @@ void right_arm_pick_object(){
 
   // Set Claw
   start_angle = R_SERVO_MOTOR_CLAW_4.read();
-  end_angle = 30;
+  end_angle = 20;
   motor = R_SERVO_MOTOR_CLAW_4;
   rotate_smoothly(start_angle, end_angle, motor, 10);
 
@@ -365,19 +351,19 @@ void right_arm_pick_object(){
 
   // Set Arm2
   start_angle = R_SERVO_MOTOR_ARM2_2.read();
-  end_angle = 10;
+  end_angle = 25;
   motor = R_SERVO_MOTOR_ARM2_2;
   rotate_smoothly(start_angle, end_angle, motor, 10);
 
   start_angle = R_SERVO_MOTOR_BASE_0.read();
-  end_angle = 55;
+  end_angle = 60;
   motor = R_SERVO_MOTOR_BASE_0;
   rotate_smoothly(start_angle, end_angle, motor, 10);
 
 
 
   start_angle = R_SERVO_MOTOR_CLAW_4.read();
-  end_angle = 80;
+  end_angle = 90;
   motor = R_SERVO_MOTOR_CLAW_4;
   rotate_smoothly(start_angle, end_angle, motor, 10);
 
@@ -425,7 +411,7 @@ void right_arm_hold_object(){
   Servo motor;
 
   start_angle = R_SERVO_HOLD_OBJECT.read();
-  end_angle = 170;
+  end_angle = 7;
   motor = R_SERVO_HOLD_OBJECT;
 
   rotate_smoothly(start_angle, end_angle, motor, 10);

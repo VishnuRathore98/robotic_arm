@@ -32,11 +32,8 @@ except Exception as e:
 
 
 def fold_object(arduino):
-    # left_arm_fold_object()
-    # right_arm_fold_object()
-    # left_arm_hold_object()
-    # right_arm_hold_object()
-    ...
+    la.left_arm_fold1_object()
+    ra.right_arm_fold2_object()
 
 
 with gr.Blocks() as app:
