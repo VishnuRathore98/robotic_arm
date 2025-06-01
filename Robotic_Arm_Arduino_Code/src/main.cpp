@@ -51,6 +51,9 @@ void loop()
     else if (motor == "l_claw")
       left_arm_claw(angle.toInt());
 
+    else if (motor == "l_fold_angle")
+      left_arm_fold_angle(angle.toInt());
+
     else if (motor == "l_set_default_position")
       left_arm_set_default_position();
 
@@ -82,6 +85,9 @@ void loop()
 
     else if (motor == "r_claw")
       right_arm_claw(angle.toInt());
+
+    else if (motor == "r_hold_angle")
+      right_arm_hold_angle(angle.toInt());
 
     else if (motor == "r_set_default_position")
       right_arm_set_default_position();

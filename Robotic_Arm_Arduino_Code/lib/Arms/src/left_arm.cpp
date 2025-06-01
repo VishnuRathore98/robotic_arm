@@ -82,6 +82,14 @@ void left_arm_claw(int angle){
   Serial.println(angle);
 }
 
+void left_arm_fold_angle(int angle){
+  // Fold the fourth claw 
+  int start_angle = L_SERVO_FOURTH_FOLD_CLAW.read();
+  int end_angle = angle;
+  Servo motor = L_SERVO_FOURTH_FOLD_CLAW;
+  rotate_smoothly(start_angle, end_angle, motor, 10);
+}
+
 void left_arm_set_default_position(){
   // servo.read() -> returns the last position value written to the servo
 

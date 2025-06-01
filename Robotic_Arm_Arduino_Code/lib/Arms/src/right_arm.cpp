@@ -82,6 +82,14 @@ void right_arm_claw(int angle){
   Serial.println(angle);
 }
 
+void right_arm_hold_angle(int angle){
+
+  int start_angle = R_SERVO_HOLD_OBJECT.read();
+  int end_angle = angle;
+  Servo motor = R_SERVO_HOLD_OBJECT;
+  rotate_smoothly(start_angle, end_angle, motor);
+}
+
 void right_arm_set_default_position(){
   // servo.read() -> returns the last position value written to the servo
 

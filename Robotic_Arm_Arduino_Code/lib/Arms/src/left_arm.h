@@ -6,6 +6,7 @@ void left_arm_arm1(int angle);
 void left_arm_arm2(int angle);
 void left_arm_wrist(int angle);
 void left_arm_claw(int angle);
+void left_arm_fold_angle(int angle);
 
 void left_arm_unfold();
 void left_arm_pick_object();
