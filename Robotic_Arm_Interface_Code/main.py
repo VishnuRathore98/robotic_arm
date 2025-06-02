@@ -32,8 +32,14 @@ except Exception as e:
 
 
 def fold_object(arduino):
-    la.left_arm_fold1_object()
-    ra.right_arm_fold2_object()
+    la.left_arm_fold1_object(arduino)
+    ra.right_arm_fold2_object(arduino)
+    la.left_arm_fold3_object(arduino)
+    ra.right_arm_unfold_object(arduino)
+    ra.right_arm_hold_object(arduino)
+    la.left_arm_unfold_arm(arduino)
+    la.left_arm_fold4_object(arduino)
+    ra.right_arm_pick_object(arduino)
 
 
 with gr.Blocks() as app:
@@ -137,7 +143,9 @@ with gr.Blocks() as app:
 
     with gr.Tab(label="Automatic Control"):
         with gr.Row():
-
+            gr.Markdown("# **Fold the Object**")
+            fold_object = gr.Button("Fold Object")
+            fold_object.click(fn=fold_object)
             with gr.Column():
                 gr.Markdown("# **Left Arm**")
 
