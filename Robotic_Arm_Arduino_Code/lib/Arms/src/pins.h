@@ -11,10 +11,10 @@
 #define L_SERVO_PIN_ARM1_1 3
 #define L_SERVO_PIN_ARM2_2 4
 #define L_SERVO_PIN_WRIST_3 5
-#define L_SERVO_PIN_CLAW_4 7
+#define L_SERVO_PIN_CLAW_4 6
 
 // Fourth fold
-#define L_FOURTH_FOLD_CLAW_PIN 6
+#define L_FOURTH_FOLD_CLAW_PIN 7
 
 // Right Arm
 #define R_SERVO_PIN_BASE_0 8

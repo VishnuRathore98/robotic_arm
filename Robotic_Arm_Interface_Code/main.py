@@ -31,7 +31,7 @@ except Exception as e:
                 print("port ttyACM2 not available")
 
 
-def fold_object(arduino):
+def fold_all_objects(arduino):
     la.left_arm_fold1_object(arduino)
     ra.right_arm_fold2_object(arduino)
     la.left_arm_fold3_object(arduino)
@@ -39,7 +39,7 @@ def fold_object(arduino):
     ra.right_arm_hold_object(arduino)
     la.left_arm_unfold_arm(arduino)
     la.left_arm_fold4_object(arduino)
-    ra.right_arm_pick_object(arduino)
+    # ra.right_arm_pick_object(arduino)
 
 
 with gr.Blocks() as app:
@@ -145,7 +145,7 @@ with gr.Blocks() as app:
         with gr.Row():
             gr.Markdown("# **Fold the Object**")
             fold_object = gr.Button("Fold Object")
-            fold_object.click(fn=fold_object)
+            fold_object.click(fn=partial(fold_all_objects, arduino=arduino))
             with gr.Column():
                 gr.Markdown("# **Left Arm**")
 

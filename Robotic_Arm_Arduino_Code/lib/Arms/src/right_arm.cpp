@@ -4,6 +4,7 @@
 #include "smooth.h"
 #include "right_arm.h"
 #include "pins.h"
+#include "left_arm.h"
 
 Servo R_SERVO_MOTOR_BASE_0;
 Servo R_SERVO_MOTOR_ARM1_1;
@@ -115,7 +116,7 @@ void right_arm_set_default_position(){
   if (right_arm_hold_angle!=0){
 
   int start_angle = right_arm_hold_angle;
-  int end_angle = 155;
+  int end_angle = 10;
   Servo motor = R_SERVO_HOLD_OBJECT;
 
   rotate_smoothly(start_angle, end_angle, motor, 10);
@@ -278,7 +279,7 @@ void right_arm_fold2_object(){
   // R_SERVO_MOTOR_BASE_0.write(42);
   // --------------------- For smooth movements ---------------------
   start_angle = R_SERVO_MOTOR_BASE_0.read();
-  end_angle = 47;
+  end_angle = 45;
   motor = R_SERVO_MOTOR_BASE_0;
   rotate_smoothly(start_angle, end_angle, motor);
   // -----------------------------------------------------------------
@@ -286,7 +287,7 @@ void right_arm_fold2_object(){
   // -----------------------------------------------------------------
 
   start_angle = R_SERVO_MOTOR_ARM2_2.read();
-  end_angle = 55;
+  end_angle = 60;
   motor = R_SERVO_MOTOR_ARM2_2;
   rotate_smoothly(start_angle, end_angle, motor);
 
@@ -300,10 +301,10 @@ void right_arm_fold2_object(){
   rotate_smoothly(start_angle, end_angle, motor);
   // -----------------------------------------------------------------
 
-  start_angle = R_SERVO_MOTOR_ARM2_2.read();
-  end_angle = 58;
-  motor = R_SERVO_MOTOR_ARM2_2;
-  rotate_smoothly(start_angle, end_angle, motor);
+  // start_angle = R_SERVO_MOTOR_ARM2_2.read();
+  // end_angle = 58;
+  // motor = R_SERVO_MOTOR_ARM2_2;
+  // rotate_smoothly(start_angle, end_angle, motor);
 
   Serial.println("fold_object called");
 }
@@ -318,8 +319,13 @@ void right_arm_pick_object(){
   
   // Set base
   start_angle = R_SERVO_MOTOR_BASE_0.read();
-  end_angle = 20;
+  end_angle = 90;
   motor = R_SERVO_MOTOR_BASE_0;
+  rotate_smoothly(start_angle, end_angle, motor, 10);
+
+  start_angle = R_SERVO_MOTOR_WRIST_3.read();
+  end_angle = 0;
+  motor = R_SERVO_MOTOR_WRIST_3;
   rotate_smoothly(start_angle, end_angle, motor, 10);
 
   // Set Arm1
@@ -330,36 +336,43 @@ void right_arm_pick_object(){
 
   // Set Arm2
   start_angle = R_SERVO_MOTOR_ARM2_2.read();
-  end_angle = 90;
+  end_angle = 20;
   motor = R_SERVO_MOTOR_ARM2_2;
   rotate_smoothly(start_angle, end_angle, motor, 10);
 
   // Set Claw
   start_angle = R_SERVO_MOTOR_CLAW_4.read();
-  end_angle = 20;
+  end_angle = 30;
   motor = R_SERVO_MOTOR_CLAW_4;
   rotate_smoothly(start_angle, end_angle, motor, 10);
 
-  start_angle = R_SERVO_MOTOR_WRIST_3.read();
-  end_angle = 180;
-  motor = R_SERVO_MOTOR_WRIST_3;
-  rotate_smoothly(start_angle, end_angle, motor, 10);
+  
 
   // Hold the object
 
   //Hold
 
-  // Set Arm2
-  start_angle = R_SERVO_MOTOR_ARM2_2.read();
-  end_angle = 25;
-  motor = R_SERVO_MOTOR_ARM2_2;
-  rotate_smoothly(start_angle, end_angle, motor, 10);
-
-  start_angle = R_SERVO_MOTOR_BASE_0.read();
+    start_angle = R_SERVO_MOTOR_BASE_0.read();
   end_angle = 60;
   motor = R_SERVO_MOTOR_BASE_0;
   rotate_smoothly(start_angle, end_angle, motor, 10);
 
+
+  // Set Arm2
+  start_angle = R_SERVO_MOTOR_ARM2_2.read();
+  end_angle = 15;
+  motor = R_SERVO_MOTOR_ARM2_2;
+  rotate_smoothly(start_angle, end_angle, motor, 10);
+
+  start_angle = R_SERVO_MOTOR_BASE_0.read();
+  end_angle = 50;
+  motor = R_SERVO_MOTOR_BASE_0;
+  rotate_smoothly(start_angle, end_angle, motor, 10);
+
+  start_angle = R_SERVO_MOTOR_BASE_0.read();
+  end_angle = 40;
+  motor = R_SERVO_MOTOR_BASE_0;
+  rotate_smoothly(start_angle, end_angle, motor, 10);
 
 
   start_angle = R_SERVO_MOTOR_CLAW_4.read();
@@ -370,7 +383,7 @@ void right_arm_pick_object(){
   // Pick the object
 
   start_angle = R_SERVO_MOTOR_BASE_0.read();
-  end_angle = 20;
+  end_angle = 60;
   motor = R_SERVO_MOTOR_BASE_0;
   rotate_smoothly(start_angle, end_angle, motor, 10);
 
@@ -385,24 +398,17 @@ void right_arm_pick_object(){
 
   // Set Arm2
   start_angle = R_SERVO_MOTOR_ARM2_2.read();
-  end_angle = 90;
+  end_angle = 45;
   motor = R_SERVO_MOTOR_ARM2_2;
   rotate_smoothly(start_angle, end_angle, motor, 10);
 
 
   // Set base
   start_angle = R_SERVO_MOTOR_BASE_0.read();
-  end_angle = 180;
+  end_angle = 120;
   motor = R_SERVO_MOTOR_BASE_0;
   rotate_smoothly(start_angle, end_angle, motor, 10);
 
-
-  // Set Wrist
-  start_angle = R_SERVO_MOTOR_WRIST_3.read();
-  end_angle = 0;
-  motor = R_SERVO_MOTOR_WRIST_3;
-  rotate_smoothly(start_angle, end_angle, motor, 10);
-  
 }
 
 // Pick and serve second option
@@ -450,7 +456,7 @@ void right_arm_pick_object_2(){
     // Hold the object
       start_angle = R_SERVO_MOTOR_CLAW_4.read();
       end_angle = 85;
-      motor = R_SERVO_MOTOR_CLAW_4
+      motor = R_SERVO_MOTOR_CLAW_4;
       rotate_smoothly(start_angle,end_angle,motor,10);
   
 
@@ -516,7 +522,7 @@ void right_arm_hold_object(){
   Servo motor;
 
   start_angle = R_SERVO_HOLD_OBJECT.read();
-  end_angle = 7;
+  end_angle = 150;
   motor = R_SERVO_HOLD_OBJECT;
 
   rotate_smoothly(start_angle, end_angle, motor, 10);
