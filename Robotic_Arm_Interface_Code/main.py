@@ -1,4 +1,5 @@
 import time
+import json
 import gradio as gr
 import serial as sr
 from functools import partial
@@ -31,15 +32,11 @@ except Exception as e:
                 print("port ttyACM2 not available")
 
 
-def fold_all_objects(arduino):
-    la.left_arm_fold1_object(arduino)
-    ra.right_arm_fold2_object(arduino)
-    la.left_arm_fold3_object(arduino)
-    ra.right_arm_unfold_object(arduino)
-    ra.right_arm_hold_object(arduino)
-    la.left_arm_unfold_arm(arduino)
-    la.left_arm_fold4_object(arduino)
-    # ra.right_arm_pick_object(arduino)
+def fold_all_objects():
+    data = {"action": "all_folds", "angle": "0"}
+    json_str = json.dumps(data) + "\n"
+    arduino.write(json_str.encode())
+    print("All folds")
 
 
 with gr.Blocks() as app:

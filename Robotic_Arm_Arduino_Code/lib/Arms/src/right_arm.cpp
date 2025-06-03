@@ -97,30 +97,22 @@ void right_arm_set_default_position(){
   int right_arm_claw_angle = R_SERVO_MOTOR_CLAW_4.read();
   int right_arm_hold_angle = R_SERVO_HOLD_OBJECT.read();
 
-  // print current arm positions
-  // Serial.print("Currnt Base angle: ");
-  // Serial.println(right_arm_base_angle);
+/* Print current arm positions
+  Serial.print("Currnt Base angle: ");
+  Serial.println(right_arm_base_angle);
 
-  // Serial.print("Currnt arm1 angle: ");
-  // Serial.println(right_arm_arm1_angle);
+  Serial.print("Currnt arm1 angle: ");
+  Serial.println(right_arm_arm1_angle);
 
-  // Serial.print("Currnt arm2 angle: ");
-  // Serial.println(right_arm_arm2_angle);
+  Serial.print("Currnt arm2 angle: ");
+  Serial.println(right_arm_arm2_angle);
 
-  // Serial.print("Currnt wrist angle: ");
-  // Serial.println(right_arm_wrist_angle);
+  Serial.print("Currnt wrist angle: ");
+  Serial.println(right_arm_wrist_angle);
 
-  // Serial.print("Currnt left angle: ");
-  // Serial.println(right_arm_claw_angle);
-
-  if (right_arm_hold_angle!=0){
-
-  int start_angle = right_arm_hold_angle;
-  int end_angle = 10;
-  Servo motor = R_SERVO_HOLD_OBJECT;
-
-  rotate_smoothly(start_angle, end_angle, motor, 10);
-  }
+  Serial.print("Currnt left angle: ");
+  Serial.println(right_arm_claw_angle);
+*/
 
   // move claw left to 90
   if (right_arm_claw_angle != 30)
@@ -185,6 +177,16 @@ void right_arm_set_default_position(){
     rotate_smoothly(start_angle, end_angle, motor);
     // -----------------------------------------------------------------
   }
+  if (right_arm_hold_angle!=0){
+
+  int start_angle = right_arm_hold_angle;
+  int end_angle = 10;
+  Servo motor = R_SERVO_HOLD_OBJECT;
+
+  rotate_smoothly(start_angle, end_angle, motor, 10);
+  }
+
+
 }
 
 // Unfolds the right arms
