@@ -25,4 +25,13 @@
 
 #define R_SERVO_PIN_HOLD_OBJECT 13
 
+// The following are digital pins
+
+#define FOLD_OBJECT_BUTTON 22
+#define RESET_ARMS_BUTTON 23 
+
+#define LED_RED 24
+#define LED_YELLOW 25 
+#define LED_GREEN 26
+
 #endif

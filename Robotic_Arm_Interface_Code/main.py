@@ -142,7 +142,7 @@ with gr.Blocks() as app:
         with gr.Row():
             gr.Markdown("# **Fold the Object**")
             fold_object = gr.Button("Fold Object")
-            fold_object.click(fn=partial(fold_all_objects, arduino=arduino))
+            fold_object.click(fn=fold_all_objects)
             with gr.Column():
                 gr.Markdown("# **Left Arm**")
 

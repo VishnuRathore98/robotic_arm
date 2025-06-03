@@ -2,9 +2,7 @@
 #include <ArduinoJson.h>
 #include "left_arm.cpp"
 #include "right_arm.cpp"
-
-#define FOLD_OBJECT_BUTTON 22
-#define RESET_ARMS_BUTTON 23 
+#include "pins.h"
 
 int current_reset_button_state = LOW;
 int last_reset_button_state = LOW;
@@ -12,12 +10,23 @@ int last_reset_button_state = LOW;
 int current_fold_object_button_state = LOW;
 int last_fold_object_button_state = LOW;
 
+void all_folds_object();
 void setup()
 {
   Serial.begin(9600);
 
+  // LED Pins
+  pinMode(LED_RED, OUTPUT);
+  pinMode(LED_YELLOW, OUTPUT);
+  pinMode(LED_GREEN, OUTPUT);
+
+  // Button Pins
   pinMode(FOLD_OBJECT_BUTTON, INPUT_PULLUP);
-  // pinMode(RESET_ARMS_BUTTON, INPUT_PULLUP);
+  pinMode(RESET_ARMS_BUTTON, INPUT_PULLUP);
+
+  digitalWrite(LED_RED, HIGH);
+  digitalWrite(LED_YELLOW, LOW);
+  digitalWrite(LED_GREEN, LOW);
   
   attach_left_arm_servos();
   attach_right_arm_servos();
@@ -27,12 +36,47 @@ void setup()
 
 void loop(){
 
-  // current_reset_button_state = digitalRead(RESET_ARMS_BUTTON);
-  // current_fold_object_button_state = digitalRead(FOLD_OBJECT_BUTTON);
+  current_reset_button_state = digitalRead(RESET_ARMS_BUTTON);
+  current_fold_object_button_state = digitalRead(FOLD_OBJECT_BUTTON);
   // Serial.println(current_reset_button_state);
   // Serial.println(current_fold_object_button_state);
 
-// if (current_fold_object_button_state == HIGH && last_fold_object_button_state == LOW){
+if (current_fold_object_button_state == HIGH && last_fold_object_button_state == LOW){
+  digitalWrite(LED_RED, LOW);
+  digitalWrite(LED_GREEN, LOW);
+  digitalWrite(LED_YELLOW, HIGH);
+  delay(200);
+  left_arm_fold1_object();
+  delay(200);
+  right_arm_fold2_object();
+  delay(200);
+  left_arm_fold3_object();
+  delay(200);
+  right_arm_unfold_object();
+  delay(200);
+  right_arm_hold_object();
+  delay(200);
+  left_arm_unfold();
+  delay(200);
+  left_arm_fold4_object();
+  delay(200);
+  // right_arm_pick_object();
+  delay(200);  
+  digitalWrite(LED_YELLOW, LOW);
+  digitalWrite(LED_GREEN, HIGH);
+
+  }
+else if (current_fold_object_button_state == LOW && last_fold_object_button_state == HIGH){
+      delay(200);
+    left_arm_set_default_position();
+    delay(200);
+    right_arm_set_default_position();
+    delay(200);
+
+    digitalWrite(LED_YELLOW, LOW);
+    digitalWrite(LED_GREEN, LOW);
+  digitalWrite(LED_RED, HIGH);
+}
 //   delay(200);
 //   left_arm_fold1_object();
 //   delay(200);
@@ -50,39 +94,26 @@ void loop(){
 //   delay(200);
 //   right_arm_pick_object();
 //   delay(200);  
+//   digitalWrite(LED_YELLOW, LOW);
+//   digitalWrite(LED_GREEN, HIGH);
 //   }
 
 //   if (current_reset_button_state == LOW && last_reset_button_state == HIGH){
 //     delay(200);
 //     left_arm_set_default_position();
 //     delay(200);
-//     // right_arm_set_default_position();
+//     right_arm_set_default_position();
 //     delay(200);
 //  } 
-// ------------------------------------------------------------------------------------------
-// if (current_reset_button_state == HIGH && last_reset_button_state == LOW)
-//   {
+//  if (current_reset_button_state == HIGH && last_reset_button_state == LOW){
 //     delay(200);
-//     left_arm_fold1_object();
-//     // left_arm_set_default_position();
-//     delay(200);
-//     // right_arm_set_default_position();
-//     delay(200);
-//   }
-
-
-//   if (current_reset_button_state == LOW && last_reset_button_state == HIGH)
-//   {
-//     delay(200);
-    
 //     left_arm_set_default_position();
 //     delay(200);
-//     // right_arm_set_default_position();
+//     right_arm_set_default_position();
 //     delay(200);
-//   }
-  
-//  last_fold_object_button_state = current_fold_object_button_state;
-//  last_reset_button_state = current_reset_button_state;
+//  }
+ last_fold_object_button_state = current_fold_object_button_state;
+ last_reset_button_state = current_reset_button_state;
   
   if (Serial.available() != 0)
   {
@@ -187,6 +218,7 @@ void loop(){
 
 void all_folds_object(){
   delay(200);
+  digitalWrite(LED_YELLOW,HIGH);
   left_arm_fold1_object();
   delay(200);
   right_arm_fold2_object();
@@ -200,5 +232,6 @@ void all_folds_object(){
   left_arm_unfold();
   delay(200);
   left_arm_fold4_object();
+  digitalWrite(LED_GREEN,HIGH);
   // right_arm_pick_object();
 }

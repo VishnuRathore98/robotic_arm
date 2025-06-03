@@ -363,7 +363,7 @@ void left_arm_fold4_object(){
   rotate_smoothly(start_angle, end_angle, motor,10);
 
   start_angle = L_SERVO_FOURTH_FOLD_CLAW.read();
-  end_angle = 135;
+  end_angle = 145;
   motor = L_SERVO_FOURTH_FOLD_CLAW;
   rotate_smoothly(start_angle, end_angle, motor,10);
 }

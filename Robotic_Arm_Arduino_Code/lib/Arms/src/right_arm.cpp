@@ -524,7 +524,7 @@ void right_arm_hold_object(){
   Servo motor;
 
   start_angle = R_SERVO_HOLD_OBJECT.read();
-  end_angle = 150;
+  end_angle = 155;
   motor = R_SERVO_HOLD_OBJECT;
 
   rotate_smoothly(start_angle, end_angle, motor, 10);
